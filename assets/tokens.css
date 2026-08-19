@@ -1,12 +1,9 @@
 /* ==========================================================================
-   FAITHSTREAM / HOUSE OF FAITH DESIGN SYSTEM TOKENS
+   FAITHSTREAM / HOUSE OF FAITH DESIGN SYSTEM & STYLES
    ========================================================================== */
 
 :root {
-  /* ------------------------------------------------------------------------
-     1. COLOR PALETTE
-     ------------------------------------------------------------------------ */
-  /* Core Brand Colors */
+  /* Color Palette */
   --plum: #33152C;
   --plum-dark: #1E0B1A;
   --plum-black: #0A0A0F;
@@ -20,86 +17,48 @@
   --surface: #111118;
   --surface-card: #181822;
   --surface-hover: #222230;
-  --surface-active: #2A2A3C;
-  
-  /* Text & Functional Colors */
-  --text-primary: #FAF6F0;
-  --text-secondary: #C29BB0;
-  --text-muted: #8E7A8A;
   --border-subtle: rgba(194, 155, 176, 0.15);
-  --border-active: #E01E69;
 
-  /* Status Colors */
-  --success: #10B981;
-  --warning: #F59E0B;
-  --danger: #EF4444;
-
-  /* ------------------------------------------------------------------------
-     2. TYPOGRAPHY
-     ------------------------------------------------------------------------ */
-  /* Font Families */
+  /* Typography */
   --font-display: 'Syne', sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'SF Mono', 'Fira Code', monospace;
 
   /* Type Scale */
-  --fs-xs: 0.75rem;    /* 12px */
-  --fs-sm: 0.875rem;   /* 14px */
-  --fs-base: 1rem;     /* 16px */
-  --fs-md: 1.125rem;   /* 18px */
-  --fs-lg: 1.25rem;    /* 20px */
-  --fs-xl: 1.5rem;     /* 24px */
-  --fs-2xl: 2rem;      /* 32px */
-  --fs-3xl: 2.5rem;    /* 40px */
-  --fs-4xl: 3.25rem;   /* 52px */
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: 1.25rem;
+  --fs-xl: 1.5rem;
+  --fs-2xl: 2rem;
+  --fs-3xl: 2.5rem;
+  --fs-4xl: 3.25rem;
 
-  /* Line Heights */
-  --lh-tight: 1.1;
-  --lh-normal: 1.4;
-  --lh-relaxed: 1.6;
+  /* Spacing Scale */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.25rem;
+  --sp-6: 1.5rem;
+  --sp-8: 2rem;
+  --sp-10: 2.5rem;
+  --sp-12: 3rem;
 
-  /* ------------------------------------------------------------------------
-     3. SPACING SCALE
-     ------------------------------------------------------------------------ */
-  --sp-1: 0.25rem;   /* 4px */
-  --sp-2: 0.5rem;    /* 8px */
-  --sp-3: 0.75rem;   /* 12px */
-  --sp-4: 1rem;      /* 16px */
-  --sp-5: 1.25rem;   /* 20px */
-  --sp-6: 1.5rem;    /* 24px */
-  --sp-8: 2rem;      /* 32px */
-  --sp-10: 2.5rem;   /* 40px */
-  --sp-12: 3rem;      /* 48px */
-  --sp-16: 4rem;      /* 64px */
-  --sp-20: 5rem;      /* 80px */
-
-  /* ------------------------------------------------------------------------
-     4. BORDERS & SHADOWS
-     ------------------------------------------------------------------------ */
+  /* Border Radii */
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 16px;
   --radius-xl: 24px;
   --radius-full: 9999px;
 
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.35);
-  --shadow-glow: 0 0 25px var(--magenta-glow);
-
-  /* Transitions */
+  /* Layout Dimensions */
+  --navbar-height: 72px;
   --transition-fast: 150ms ease;
   --transition-normal: 250ms ease;
-
-  /* Layout Dimensions */
-  --sidebar-width-desktop: 248px;
-  --sidebar-width-laptop: 210px;
-  --topbar-height-mobile: 60px;
 }
 
-/* ==========================================================================
-   GLOBAL BASE STYLES
-   ========================================================================== */
-
+/* Base Styles */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -108,51 +67,188 @@
 
 body {
   background-color: var(--surface);
-  color: var(--text-primary);
+  color: var(--cream);
   font-family: var(--font-body);
   font-size: var(--fs-base);
-  line-height: var(--lh-relaxed);
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
 
 a {
-  color: var(--magenta);
+  color: inherit;
   text-decoration: none;
-  transition: color var(--transition-fast);
 }
 
-a:hover {
-  color: var(--cream);
-}
-
-img, video {
-  max-width: 100%;
-  height: auto;
-  display: block;
+/* Main Container Offset */
+.bs-main {
+  margin-left: 0;
+  padding-top: calc(var(--navbar-height) + var(--sp-8));
+  padding-bottom: var(--sp-12);
+  padding-left: var(--sp-8);
+  padding-right: var(--sp-8);
+  max-width: 1400px;
+  margin-right: auto;
 }
 
 /* ==========================================================================
-   LAYOUT STRUCTURE
+   HORIZONTAL TOP NAVBAR COMPONENT
    ========================================================================== */
 
-/* Main Content Wrapper (Accounts for Sidebar Offset) */
-.bs-main {
-  margin-left: var(--sidebar-width-desktop);
-  padding: var(--sp-8);
-  min-height: 100vh;
-  transition: margin-left var(--transition-normal);
+.hof-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--navbar-height);
+  background: linear-gradient(180deg, var(--plum-dark) 0%, rgba(30, 11, 26, 0.95) 100%);
+  border-bottom: 1px solid var(--border-subtle);
+  backdrop-filter: blur(12px);
+  z-index: 1000;
 }
 
-/* Buttons System */
+.hof-nav-container {
+  max-width: 1400px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 var(--sp-8);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo Styling */
+.hof-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.hof-logo-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: var(--plum);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cream);
+  border: 1px solid var(--border-subtle);
+}
+
+.hof-logo-mark svg {
+  width: 22px;
+  height: 22px;
+}
+
+.hof-brand-text {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-2);
+}
+
+.brand-title {
+  font-family: var(--font-body);
+  font-size: var(--fs-md);
+  font-weight: 500;
+  color: var(--cream);
+}
+
+.brand-subtitle {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 800;
+  color: var(--cream);
+  letter-spacing: -0.01em;
+}
+
+/* Nav Links Group */
+.hof-nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-8);
+}
+
+.hof-nav-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--lavender);
+  transition: color var(--transition-fast);
+  padding: var(--sp-2) 0;
+}
+
+.hof-nav-item:hover {
+  color: var(--cream);
+}
+
+.hof-nav-item.active {
+  color: var(--cream);
+  font-weight: 700;
+}
+
+.dropdown-chevron {
+  opacity: 0.7;
+}
+
+/* Search Icon Button */
+.hof-search-btn {
+  background: transparent;
+  border: none;
+  color: var(--lavender);
+  cursor: pointer;
+  padding: var(--sp-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-fast);
+}
+
+.hof-search-btn:hover {
+  color: var(--cream);
+}
+
+/* Mobile Toggle & Menu */
+.hof-mobile-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--cream);
+  cursor: pointer;
+}
+
+.hof-mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: var(--plum-dark);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: var(--sp-4) var(--sp-8);
+}
+
+.hof-mobile-menu.open {
+  display: flex;
+}
+
+.hof-mobile-link {
+  padding: var(--sp-3) 0;
+  color: var(--lavender);
+  font-size: var(--fs-base);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.hof-mobile-link.active {
+  color: var(--cream);
+  font-weight: 700;
+}
+
+/* Utility Buttons */
 .bs-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--sp-2);
   padding: var(--sp-3) var(--sp-6);
   border-radius: var(--radius-md);
-  font-family: var(--font-body);
   font-size: var(--fs-sm);
   font-weight: 600;
   cursor: pointer;
@@ -167,7 +263,6 @@ img, video {
 
 .bs-btn-primary:hover {
   background-color: #f12373;
-  box-shadow: var(--shadow-glow);
 }
 
 .bs-btn-outline {
@@ -178,192 +273,30 @@ img, video {
 
 .bs-btn-outline:hover {
   border-color: var(--magenta);
-  background-color: rgba(224, 30, 105, 0.08);
 }
 
-/* Footer Element */
+/* Footer */
 .bs-footer {
-  margin-top: var(--sp-16);
+  margin-top: var(--sp-12);
   padding-top: var(--sp-8);
   border-top: 1px solid var(--border-subtle);
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  gap: var(--sp-4);
   font-size: var(--fs-xs);
-  color: var(--text-muted);
+  color: var(--lavender-muted);
 }
 
-.bs-footer-links a {
-  color: var(--lavender);
-  margin-left: var(--sp-1);
-}
-
-/* ==========================================================================
-   RESPONSIVE BREAKPOINTS
-   ========================================================================== */
-
-@media (max-width: 1279px) and (min-width: 1101px) {
+/* Mobile Breakpoints */
+@media (max-width: 768px) {
+  .hof-nav-links {
+    display: none;
+  }
+  .hof-mobile-toggle {
+    display: block;
+  }
   .bs-main {
-    margin-left: var(--sidebar-width-laptop);
-    padding: var(--sp-6);
-  }
-}
-
-@media (max-width: 1100px) {
-  .bs-main {
-    margin-left: 0;
-    padding: var(--sp-6);
-    padding-top: calc(var(--topbar-height-mobile) + var(--sp-6));
-  }
-}
-
-@media (max-width: 640px) {
-  .bs-main {
-    padding: var(--sp-4);
-    padding-top: calc(var(--topbar-height-mobile) + var(--sp-4));
-  }
-  
-  .bs-footer {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
-
-/* ==========================================================================
-   NAVIGATION COMPONENTS (TOPBAR, SIDEBAR & DRAWER)
-   ========================================================================== */
-
-/* Fixed Desktop Sidebar */
-.bs-sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: var(--sidebar-width-desktop);
-  background-color: var(--surface-card);
-  border-right: 1px solid var(--border-subtle);
-  display: flex;
-  flex-direction: column;
-  z-index: 100;
-  transition: width var(--transition-normal), transform var(--transition-normal);
-}
-
-.bs-sidebar-header {
-  padding: var(--sp-6) var(--sp-6) var(--sp-4);
-  display: flex;
-  align-items: center;
-  gap: var(--sp-3);
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.bs-sidebar-logo {
-  height: 28px;
-  width: auto;
-}
-
-.bs-sidebar-title {
-  font-family: var(--font-display);
-  font-size: var(--fs-md);
-  font-weight: 700;
-  color: var(--cream);
-}
-
-/* Nav Items & Active States */
-.bs-nav {
-  padding: var(--sp-4) var(--sp-3);
-  display: flex;
-  flex-direction: column;
-  gap: var(--sp-1);
-  flex-grow: 1;
-}
-
-.bs-nav-link {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-3);
-  padding: var(--sp-3) var(--sp-4);
-  color: var(--text-secondary);
-  font-size: var(--fs-sm);
-  font-weight: 500;
-  border-radius: var(--radius-md);
-  transition: all var(--transition-fast);
-}
-
-.bs-nav-link:hover {
-  color: var(--cream);
-  background-color: var(--surface-hover);
-}
-
-.bs-nav-link.active {
-  color: var(--cream);
-  background-color: var(--plum);
-  border-left: 3px solid var(--magenta);
-  font-weight: 600;
-}
-
-/* Mobile & Tablet Topbar (Hide on Desktop) */
-.bs-topbar {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: var(--topbar-height-mobile);
-  background-color: var(--surface-card);
-  border-bottom: 1px solid var(--border-subtle);
-  padding: 0 var(--sp-4);
-  align-items: center;
-  justify-content: space-between;
-  z-index: 90;
-}
-
-.bs-menu-btn {
-  background: transparent;
-  border: none;
-  color: var(--cream);
-  font-size: var(--fs-xl);
-  cursor: pointer;
-  padding: var(--sp-2);
-}
-
-.bs-drawer-backdrop {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background-color: rgba(10, 10, 15, 0.7);
-  backdrop-filter: blur(4px);
-  z-index: 95;
-}
-
-.bs-drawer-backdrop.open {
-  display: block;
-}
-
-/* ------------------------------------------------------------------------
-   RESPONSIVE NAVBAR BREAKPOINTS
-   ------------------------------------------------------------------------ */
-
-@media (max-width: 1279px) and (min-width: 1101px) {
-  .bs-sidebar {
-    width: var(--sidebar-width-laptop);
-  }
-}
-
-@media (max-width: 1100px) {
-  .bs-topbar {
-    display: flex;
-  }
-
-  .bs-sidebar {
-    transform: translateX(-100%);
-    width: 280px;
-    z-index: 100;
-  }
-
-  .bs-sidebar.open {
-    transform: translateX(0);
-    box-shadow: var(--shadow-md);
+    padding-left: var(--sp-4);
+    padding-right: var(--sp-4);
   }
 }
