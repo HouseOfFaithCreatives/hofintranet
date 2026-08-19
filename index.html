@@ -3,27 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>House of Faith Intranet — Hub</title>
+  <title>House of Faith Intranet — Home</title>
 
   <!-- Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Core System Tokens -->
+  <!-- Core System Tokens CSS -->
   <link rel="stylesheet" href="assets/tokens.css">
 
   <style>
-    /* Custom Redesign Layout Styles */
-    
-    /* Hero Banner Component */
+    /* Home Page Component Styles */
     .portal-hero {
       position: relative;
-      background: radial-gradient(120% 120% at 50% 0%, var(--plum-dark) 0%, var(--surface) 100%);
+      background: radial-gradient(120% 120% at 50% 0%, var(--plum) 0%, var(--surface) 100%);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-xl);
-      padding: var(--sp-12) var(--sp-8);
-      margin-bottom: var(--sp-8);
+      padding: var(--sp-10) var(--sp-8);
+      margin-bottom: var(--sp-10);
       overflow: hidden;
     }
 
@@ -32,14 +30,11 @@
       grid-template-columns: 1.8fr 1fr;
       gap: var(--sp-8);
       align-items: center;
-      position: relative;
-      z-index: 2;
     }
 
     .hero-badge {
       display: inline-flex;
       align-items: center;
-      gap: var(--sp-2);
       padding: var(--sp-1) var(--sp-3);
       background: rgba(224, 30, 105, 0.12);
       border: 1px solid rgba(224, 30, 105, 0.3);
@@ -47,17 +42,9 @@
       font-size: var(--fs-xs);
       font-weight: 600;
       color: var(--magenta);
-      letter-spacing: 0.05em;
       text-transform: uppercase;
+      letter-spacing: 0.05em;
       margin-bottom: var(--sp-4);
-    }
-
-    .hero-badge::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: var(--radius-full);
-      background: var(--magenta);
     }
 
     .hero-title {
@@ -66,17 +53,15 @@
       line-height: 1.1;
       color: var(--cream);
       margin-bottom: var(--sp-4);
-      letter-spacing: -0.02em;
     }
 
     .hero-description {
       font-size: var(--fs-md);
-      color: var(--text-secondary);
-      line-height: var(--lh-relaxed);
+      color: var(--lavender);
+      line-height: 1.6;
       max-width: 620px;
     }
 
-    /* Quick Stats Grid inside Hero */
     .hero-stats {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -101,96 +86,20 @@
       font-size: var(--fs-xs);
       color: var(--lavender-muted);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
     }
 
-    /* Section Layouts */
     .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
       margin-bottom: var(--sp-6);
       padding-bottom: var(--sp-3);
       border-bottom: 1px solid var(--border-subtle);
     }
 
-    .section-title-group h2 {
+    .section-header h2 {
       font-family: var(--font-display);
       font-size: var(--fs-2xl);
       color: var(--cream);
-      margin-bottom: var(--sp-1);
     }
 
-    .section-title-group p {
-      font-size: var(--fs-sm);
-      color: var(--text-muted);
-    }
-
-    /* Founders Modern Cards */
-    .founders-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--sp-6);
-      margin-bottom: var(--sp-10);
-    }
-
-    .founder-card {
-      position: relative;
-      background: var(--surface-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      padding: var(--sp-6);
-      display: flex;
-      gap: var(--sp-6);
-      align-items: center;
-      transition: all var(--transition-normal);
-    }
-
-    .founder-card:hover {
-      border-color: var(--magenta);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .founder-avatar-frame {
-      width: 120px;
-      height: 120px;
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      flex-shrink: 0;
-      border: 2px solid var(--border-subtle);
-    }
-
-    .founder-avatar-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .founder-details h3 {
-      font-family: var(--font-display);
-      font-size: var(--fs-xl);
-      color: var(--cream);
-      margin-bottom: var(--sp-1);
-    }
-
-    .founder-tag {
-      display: inline-block;
-      font-size: var(--fs-xs);
-      font-weight: 600;
-      color: var(--magenta);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: var(--sp-2);
-    }
-
-    .founder-bio {
-      font-size: var(--fs-xs);
-      color: var(--text-muted);
-      line-height: var(--lh-relaxed);
-    }
-
-    /* Mission & Spotlight Cards */
     .split-showcase {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -209,8 +118,7 @@
     }
 
     .content-box.accent-box {
-      background: linear-gradient(145deg, var(--plum-dark) 0%, var(--surface-card) 100%);
-      border-color: var(--plum);
+      background: linear-gradient(145deg, var(--plum) 0%, var(--surface-card) 100%);
     }
 
     .content-box h3 {
@@ -222,78 +130,21 @@
 
     .content-box p {
       font-size: var(--fs-sm);
-      color: var(--text-secondary);
-      line-height: var(--lh-relaxed);
+      color: var(--lavender);
       margin-bottom: var(--sp-4);
     }
 
-    /* Media Highlights */
-    .media-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--sp-6);
-      margin-bottom: var(--sp-10);
-    }
-
-    .media-card {
-      background: var(--surface-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .media-preview {
-      position: relative;
-      aspect-ratio: 16 / 9;
-      background: var(--plum-black);
-    }
-
-    .media-preview iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    .media-body {
-      padding: var(--sp-4);
-      flex-grow: 1;
-    }
-
-    .media-title {
-      font-size: var(--fs-sm);
-      font-weight: 600;
-      color: var(--cream);
-      line-height: var(--lh-normal);
-    }
-
-    /* Responsive Breakdown */
-    @media (max-width: 1100px) {
+    @media (max-width: 900px) {
       .portal-hero-grid,
       .split-showcase {
         grid-template-columns: 1fr;
-      }
-      .media-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 768px) {
-      .founders-grid,
-      .media-grid {
-        grid-template-columns: 1fr;
-      }
-      .founder-card {
-        flex-direction: column;
-        text-align: center;
       }
     }
   </style>
 </head>
 <body data-page="home">
 
-  <!-- Dynamic Shell Script (Injects Nav & Drawer Shell) -->
+  <!-- Dynamic Navigation Injection -->
   <script src="assets/sidebar.js"></script>
 
   <!-- Main Viewport Context -->
@@ -323,74 +174,31 @@
       </div>
     </section>
 
-    <!-- Executive Leadership Section -->
-    <section>
-      <div class="section-header">
-        <div class="section-title-group">
-          <h2>Executive Leadership</h2>
-          <p>Founders & Strategic Directors</p>
-        </div>
-      </div>
-
-      <div class="founders-grid">
-        <!-- Founder 1 -->
-        <article class="founder-card">
-          <div class="founder-avatar-frame">
-            <img src="assets/img/kunle_falodun.jpg" alt="Pastor Kunle Falodun">
-          </div>
-          <div class="founder-details">
-            <span class="founder-tag">CEO & Co-Founder</span>
-            <h3>Pastor Kunle Falodun</h3>
-            <p class="founder-bio">
-              Co-leading vision, media initiatives, and technological growth to impact Christian storytelling globally[cite: 12].
-            </p>
-          </div>
-        </article>
-
-        <!-- Founder 2 -->
-        <article class="founder-card">
-          <div class="founder-avatar-frame">
-            <img src="assets/img/hakeem_condotti.jpg" alt="Mr. Hakeem Condotti">
-          </div>
-          <div class="founder-details">
-            <span class="founder-tag">Co-Founder</span>
-            <h3>Mr. Hakeem Condotti</h3>
-            <p class="founder-bio">
-              Driving operational excellence, ecosystem expansion, and strategic partnerships across all platforms[cite: 12].
-            </p>
-          </div>
-        </article>
-      </div>
-    </section>
-
     <!-- Mission & Platform Feature Showcase -->
     <section class="split-showcase">
-      
-      <!-- Organization Profile Card -->
       <div class="content-box">
         <div>
-          <span class="hero-badge" style="margin-bottom: var(--sp-3);">About Organization</span>
+          <div class="hero-badge" style="margin-bottom: var(--sp-3);">About Organization</div>
           <h3>Transforming Faith & Technology</h3>
           <p>
-            House of Faith is a faith-based media and technology company dedicated to transforming Christian entertainment through world-class storytelling, innovative technology, and purpose-driven content[cite: 12].
+            House of Faith is a faith-based media and technology company dedicated to transforming Christian entertainment through world-class storytelling, innovative technology, and purpose-driven content.
           </p>
           <p>
-            Through films, TV series, podcasts, devotionals, and live events, House of Faith builds an ecosystem that inspires and connects audiences across Africa and the diaspora[cite: 12].
+            Through films, TV series, podcasts, devotionals, and live events, House of Faith builds an ecosystem that inspires and connects audiences across Africa and the diaspora.
           </p>
         </div>
         <a href="team.html" class="bs-btn bs-btn-primary" style="align-self: flex-start; margin-top: var(--sp-4);">Meet The Team</a>
       </div>
 
-      <!-- FaithStream Product Showcase -->
       <div class="content-box accent-box">
         <div>
-          <span class="hero-badge" style="margin-bottom: var(--sp-3);">Flagship Platform</span>
+          <div class="hero-badge" style="margin-bottom: var(--sp-3);">Flagship Platform</div>
           <h3>FaithStream Streaming Portal</h3>
           <p>
-            FaithStream brings together inspiring, family-friendly Christian content into one unified digital portal[cite: 12]. Available across mobile platforms (Google Play Store & Apple App Store)[cite: 12].
+            FaithStream brings together inspiring, family-friendly Christian content into one unified digital portal. Available across mobile platforms.
           </p>
           <p>
-            Discover movies, series, devotionals, and live events directly from any device[cite: 12].
+            Discover movies, series, devotionals, and live events directly from any device.
           </p>
         </div>
         <div style="display: flex; gap: var(--sp-3); margin-top: var(--sp-4);">
@@ -398,59 +206,17 @@
           <a href="https://ahouseoffaith.org" target="_blank" rel="noopener" class="bs-btn bs-btn-outline">House of Faith</a>
         </div>
       </div>
-
-    </section>
-
-    <!-- Media & Launch Coverage -->
-    <section>
-      <div class="section-header">
-        <div class="section-title-group">
-          <h2>Launch Coverage & Interviews</h2>
-          <p>Keynotes, interviews, and media recordings</p>
-        </div>
-      </div>
-
-      <div class="media-grid">
-        
-        <div class="media-card">
-          <div class="media-preview">
-            <iframe src="https://www.youtube.com/embed/placeholder1" title="Kunle Falodun Launch Interview" allowfullscreen></iframe>
-          </div>
-          <div class="media-body">
-            <div class="media-title">Kunle Falodun on Faith, Media & Purpose — FaithStream Launch Lagos[cite: 12]</div>
-          </div>
-        </div>
-
-        <div class="media-card">
-          <div class="media-preview">
-            <iframe src="https://www.youtube.com/embed/placeholder2" title="Tinuke Adewunmi Launch Talk" allowfullscreen></iframe>
-          </div>
-          <div class="media-body">
-            <div class="media-title">Tinuke Adewunmi Talks About FaithStream At The Launch In Lagos[cite: 12]</div>
-          </div>
-        </div>
-
-        <div class="media-card">
-          <div class="media-preview">
-            <iframe src="https://www.youtube.com/embed/placeholder3" title="FaithStream Session" allowfullscreen></iframe>
-          </div>
-          <div class="media-body">
-            <div class="media-title">FaithStream November Feature & Platform Session[cite: 12]</div>
-          </div>
-        </div>
-
-      </div>
     </section>
 
     <!-- Global Footer -->
     <footer class="bs-footer">
-      <div class="bs-footer-links">
-        Visit Official Sites: 
-        <a href="https://ahouseoffaith.org" target="_blank" rel="noopener">ahouseoffaith.org</a> | 
-        <a href="https://thefaithstream.com" target="_blank" rel="noopener">thefaithstream.com</a>[cite: 12]
+      <div>
+        Official Sites: 
+        <a href="https://ahouseoffaith.org" target="_blank" rel="noopener" style="color: var(--cream);">ahouseoffaith.org</a> | 
+        <a href="https://thefaithstream.com" target="_blank" rel="noopener" style="color: var(--cream);">thefaithstream.com</a>
       </div>
-      <div class="bs-footer-copy">
-        House of Faith © 2026. All rights reserved[cite: 12].
+      <div>
+        House of Faith © 2026. All rights reserved.
       </div>
     </footer>
 
