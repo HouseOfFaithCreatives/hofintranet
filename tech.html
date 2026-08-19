@@ -3,54 +3,75 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Management — House of Faith Intranet</title>
+<title>Tech Department — House of Faith Intranet</title>
 <link rel="icon" type="image/png" href="assets/logo/faithstream_favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 <style>
-  .mgt-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6);
-    max-width: 1000px; margin: 0 auto;
+  .dept-hero .hero-inner { padding: 76px var(--sp-6) 84px; }
+  .lead-callout {
+    max-width: 720px; margin: 0 auto var(--sp-12);
+    display: flex; align-items: center; gap: var(--sp-5);
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: var(--sp-5) var(--sp-6);
   }
-  .mgt-grid .person-photo { aspect-ratio: 1 / 1; }
-  .mgt-grid .person-photo img { object-position: center 18%; }
-  .mgt-grid .person-name { font-size: 19px; }
-  .docs-layout {
-    max-width: 1000px; margin: 0 auto;
-    display: grid; grid-template-columns: 1.25fr 0.75fr;
-    gap: var(--sp-8); align-items: stretch;
+  .lead-callout img {
+    width: 64px; height: 64px; border-radius: 50%; object-fit: cover; object-position: center 20%;
+    border: 2px solid rgba(155,47,135,0.5); flex-shrink: 0;
   }
-  .docs-layout .docs-list { max-width: none; }
-  .docs-layout .docs-head, .docs-layout .doc-row { grid-template-columns: 1fr 64px 150px; }
-  .docs-layout .doc-name span { white-space: normal; }
-  .docs-layout .docs-list .doc-row, .docs-layout .docs-head { padding: 14px var(--sp-5); }
-  .offsite-panel {
-    background: linear-gradient(140deg, #221230 0%, var(--plum) 140%);
-    border: 1px solid rgba(155,47,135,0.25); border-radius: var(--radius-xl);
-    padding: var(--sp-8);
-    display: flex; flex-direction: column; justify-content: center; gap: var(--sp-3);
+  .lead-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--magenta); margin-bottom: 3px;
   }
-  .offsite-panel .event-badge { align-self: flex-start; }
-  .offsite-note {
-    font-size: 13.5px; line-height: 1.65; color: rgba(240,238,248,0.7);
-    margin-top: var(--sp-2);
+  .lead-name { font-family: var(--font-display); font-weight: 700; font-size: 19px; color: #fff; }
+  .lead-role { font-size: 13px; color: var(--dim); margin-top: 2px; }
+  /* Document cards */
+  .doc-cards { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--sp-3); }
+  .doc-card {
+    display: flex; align-items: center; gap: var(--sp-4);
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: var(--sp-4) var(--sp-5);
+    transition: transform 0.18s, border-color 0.18s, background 0.18s;
   }
-  .docs-toolbar {
-    max-width: 1000px; margin: 0 auto var(--sp-4);
-    display: flex; justify-content: flex-end;
+  .doc-card:hover {
+    transform: translateY(-2px); border-color: rgba(155,47,135,0.45);
+    background: rgba(155,47,135,0.05);
   }
-  @media (max-width: 860px) { .docs-layout { grid-template-columns: 1fr; } }
-  .drive-link {
+  .doc-card-icon {
+    width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
+    background: rgba(108,89,166,0.16); border: 1px solid rgba(108,89,166,0.3);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .doc-card-icon svg { width: 20px; height: 20px; fill: var(--lavender-light); }
+  .doc-card-body { min-width: 0; flex: 1; }
+  .doc-card-title { font-size: 14.5px; font-weight: 700; color: var(--cream); line-height: 1.4; }
+  .doc-card-meta { font-size: 12px; color: var(--dim2); margin-top: 3px; font-family: var(--font-mono, monospace); }
+  .doc-card-open {
+    flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12.5px; font-weight: 700; color: var(--magenta);
+    letter-spacing: 0.03em; white-space: nowrap;
+  }
+  .doc-card:hover .doc-card-open { color: #B23FA0; }
+  .back-link {
     display: inline-flex; align-items: center; gap: 8px;
-    font-size: 13px; font-weight: 700; color: var(--magenta);
-    padding: 8px 14px; border: 1px solid rgba(155,47,135,0.35);
-    border-radius: var(--radius-md); background: rgba(155,47,135,0.08);
-    transition: background 0.16s, color 0.16s;
+    font-size: 13px; font-weight: 600; color: var(--dim);
+    margin-bottom: var(--sp-6); transition: color 0.16s;
   }
-  .drive-link:hover { background: rgba(155,47,135,0.16); color: #B23FA0; }
-  @media (max-width: 900px) { .mgt-grid { grid-template-columns: 1fr; max-width: 420px; } }
+  .back-link:hover { color: var(--cream); }
+  @media (max-width: 560px) {
+    .doc-card { flex-wrap: wrap; }
+    .doc-card-open { margin-left: 60px; }
+  }
+  .doc-empty {
+    border: 1px dashed rgba(155,47,135,0.4); border-radius: var(--radius-xl);
+    padding: var(--sp-16) var(--sp-8); text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: var(--sp-3);
+  }
+  .doc-empty img { height: 46px; width: auto; opacity: 0.45; margin-bottom: var(--sp-2); }
+  .doc-empty-title { font-family: var(--font-display); font-weight: 700; font-size: 19px; color: var(--cream); }
+  .doc-empty-text { font-size: 14px; line-height: 1.65; color: var(--dim); max-width: 440px; }
 </style>
 </head>
 <body>
@@ -66,23 +87,22 @@
     <nav class="nav-links">
       <a class="nav-link" href="index.html">Home</a>
       <div class="nav-item">
-        <a class="nav-link" href="team.html">Team <span class="caret">&#9662;</span></a>
+        <a class="nav-link active" href="team.html">Team <span class="caret">&#9662;</span></a>
         <div class="dropdown">
           <a href="team.html#meet-the-team">Meet the Team</a>
           <a href="hr.html">HR Department</a>
           <a href="content.html">Content</a>
-          <a href="tech.html">Tech Department</a>
+          <a href="tech.html" style="color:var(--cream)">Tech Department</a>
           <a href="fundraising.html">Fundraising</a>
           <a href="marketing.html">Marketing</a>
           <a href="design.html">Design</a>
         </div>
       </div>
       <div class="nav-item">
-        <a class="nav-link active" href="management.html">Management <span class="caret">&#9662;</span></a>
+        <a class="nav-link" href="management.html">Management <span class="caret">&#9662;</span></a>
         <div class="dropdown">
-          <a href="management.html#mgt-team">MGT Team</a>
+          <a href="management.html">MGT Team</a>
           <a href="management.html#documents">Documents</a>
-          <a href="management.html#offsite">HOF Offsite</a>
         </div>
       </div>
     </nav>
@@ -101,98 +121,44 @@
     <a class="sub" href="marketing.html">Marketing</a>
     <a class="sub" href="design.html">Design</a>
     <div class="group-label">Management</div>
-    <a class="sub active" href="management.html#mgt-team">MGT Team</a>
+    <a class="sub" href="management.html">MGT Team</a>
     <a class="sub" href="management.html#documents">Documents</a>
-    <a class="sub" href="management.html#offsite">HOF Offsite</a>
   </div>
 </header>
 
 <!-- ══ HERO ══ -->
-<section class="hero page-hero">
+<section class="hero dept-hero">
   <img class="hero-mark" src="assets/logo/faithstream_icon_white.png" alt="" aria-hidden="true">
   <div class="hero-inner">
-    <div class="hero-kicker">House of Faith</div>
+    <div class="hero-kicker">Team &middot; Department</div>
     <div class="hero-frame">
-      <h1 class="hero-title">Mgt</h1>
+      <h1 class="hero-title">Tech Department</h1>
     </div>
   </div>
 </section>
 
-<!-- ══ MGT TEAM ══ -->
-<section class="section" id="mgt-team">
+<!-- ══ CONTENT ══ -->
+<section class="section">
   <div class="container">
-    <div class="section-kicker">Leadership</div>
-    <h2 class="section-title">MGT Team</h2>
-    <div class="mgt-grid">
-      <article class="person-card">
-        <div class="person-photo"><img src="assets/img/kunle.jpg" alt="Kunle Falodun"></div>
-        <div class="person-info">
-          <h3 class="person-name">Kunle Falodun</h3>
-          <div class="person-role">CEO / Co-Founder</div>
-        </div>
-      </article>
-      <article class="person-card">
-        <div class="person-photo"><img src="assets/img/tinuke.jpg" alt="Tinuke Oloko"></div>
-        <div class="person-info">
-          <h3 class="person-name">Tinuke Oloko</h3>
-          <div class="person-role">Chief of Staff</div>
-        </div>
-      </article>
-      <article class="person-card">
-        <div class="person-photo"><img src="assets/img/hakeem.jpg" alt="Condotti Hakeem"></div>
-        <div class="person-info">
-          <h3 class="person-name">Condotti Hakeem</h3>
-          <div class="person-role">Co-Founder</div>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
+    <a class="back-link" href="team.html#departments">&larr; Back to all departments</a>
 
-<!-- ══ DOCUMENTS ══ -->
-<section class="section" id="documents">
-  <div class="container">
-    <div class="section-kicker">Resources</div>
-    <h2 class="section-title">Documents</h2>
-    <div class="docs-toolbar">
-      <a class="drive-link" href="https://docs.google.com/folderview?id=1VJbWCCSx-tLLh_SNB9csD7pa4KrSHbHa" target="_blank" rel="noopener">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2z"/></svg>
-        Open folder in Drive
-      </a>
-    </div>
-    <div class="docs-layout" id="offsite">
-      <div class="docs-list">
-        <div class="docs-head"><span>Title</span><span>Modified</span><span>Owner</span></div>
-        <a class="doc-row" href="https://docs.google.com/folderview?id=1VJbWCCSx-tLLh_SNB9csD7pa4KrSHbHa" target="_blank" rel="noopener">
-          <div class="doc-name">
-            <span class="doc-icon folder">&#128193;&#xFE0E;</span>
-            <span>Recordings</span>
-          </div>
-          <div class="doc-date">Jul 20</div>
-          <div class="doc-owner">Esther Ebun Apata</div>
-        </a>
-        <a class="doc-row" href="https://docs.google.com/folderview?id=1VJbWCCSx-tLLh_SNB9csD7pa4KrSHbHa" target="_blank" rel="noopener">
-          <div class="doc-name">
-            <span class="doc-icon slides">&#128200;&#xFE0E;</span>
-            <span>Accountability Reporting Rhythm_Deck</span>
-          </div>
-          <div class="doc-date">Jul 17</div>
-          <div class="doc-owner">Tinuke Adewunmi</div>
-        </a>
-        <a class="doc-row" href="https://docs.google.com/folderview?id=1VJbWCCSx-tLLh_SNB9csD7pa4KrSHbHa" target="_blank" rel="noopener">
-          <div class="doc-name">
-            <span class="doc-icon ppt">&#128196;&#xFE0E;</span>
-            <span>FaithStream &amp; House of Faith Marketing Platform.pptx</span>
-          </div>
-          <div class="doc-date">Jul 22</div>
-          <div class="doc-owner">Esther Ebun Apata</div>
-        </a>
+    <div class="lead-callout">
+      <img src="assets/img/pelumi.jpg" alt="Aluko Pelumi">
+      <div>
+        <div class="lead-label">Team Lead</div>
+        <div class="lead-name">Aluko Pelumi</div>
+        <div class="lead-role">Tech Product Lead</div>
       </div>
-      <div class="offsite-panel">
-        <span class="event-badge">Company Event</span>
-        <h2 class="event-title">HOF Offsite</h2>
-        <div class="event-date">16th &amp; 17th of July 2026</div>
-        <p class="offsite-note">These documents are from the office meetings held at the HOF Offsite.</p>
+    </div>
+
+    <div class="section-kicker">Resources</div>
+    <h2 class="section-title">Department Documents</h2>
+
+    <div class="doc-cards">
+      <div class="doc-empty">
+        <img src="assets/logo/faithstream_icon_white.png" alt="">
+        <div class="doc-empty-title">Documents coming soon</div>
+        <p class="doc-empty-text">This department&rsquo;s files haven&rsquo;t been added yet. Once they&rsquo;re ready, they&rsquo;ll appear here with direct Google&nbsp;Drive links &mdash; just like the Marketing page.</p>
       </div>
     </div>
   </div>
