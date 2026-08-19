@@ -10,19 +10,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Core System Tokens CSS -->
+  <!-- Design Tokens -->
   <link rel="stylesheet" href="assets/tokens.css">
 
   <style>
-    /* Hero Banner Component */
+    /* Hero Section */
     .portal-hero {
-      position: relative;
       background: radial-gradient(120% 120% at 50% 0%, var(--plum) 0%, var(--surface) 100%);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-xl);
       padding: clamp(1.25rem, 4vw, 2.5rem);
       margin-bottom: var(--sp-10);
-      overflow: hidden;
     }
 
     .portal-hero-grid {
@@ -53,13 +51,11 @@
       line-height: 1.1;
       color: var(--cream);
       margin-bottom: var(--sp-3);
-      letter-spacing: -0.02em;
     }
 
     .hero-description {
       font-size: var(--fs-md);
       color: var(--lavender);
-      line-height: 1.6;
     }
 
     .hero-stats {
@@ -79,7 +75,6 @@
       font-family: var(--font-display);
       font-size: var(--fs-2xl);
       color: var(--cream);
-      margin-bottom: var(--sp-1);
     }
 
     .stat-label {
@@ -88,7 +83,7 @@
       text-transform: uppercase;
     }
 
-    /* Section Headers */
+    /* Section Header */
     .section-title {
       font-family: var(--font-display);
       font-size: var(--fs-xl);
@@ -140,7 +135,6 @@
       font-family: var(--font-display);
       font-size: var(--fs-md);
       color: var(--cream);
-      margin-bottom: var(--sp-1);
     }
 
     .founder-role {
@@ -150,14 +144,13 @@
       text-transform: uppercase;
     }
 
-    /* About Card */
+    /* About Section */
     .about-card {
       background: var(--surface-card);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
       padding: clamp(1.25rem, 3vw, 2rem);
       margin-bottom: var(--sp-10);
-      line-height: 1.6;
       color: var(--lavender);
     }
 
@@ -169,7 +162,7 @@
       margin-bottom: 0;
     }
 
-    /* FaithStream App Feature Promo Banner */
+    /* FaithStream Promo Banner */
     .faithstream-promo {
       background: linear-gradient(135deg, var(--plum-dark) 0%, var(--surface-card) 100%);
       border: 1px solid var(--border-subtle);
@@ -192,7 +185,6 @@
     .promo-content p {
       color: var(--lavender);
       margin-bottom: var(--sp-6);
-      font-size: var(--fs-base);
     }
 
     .promo-media iframe {
@@ -202,7 +194,7 @@
       aspect-ratio: 16 / 9;
     }
 
-    /* Video Embeds Grid — 3 Videos in 1 Line */
+    /* YouTube Videos (3 in 1 Row Desktop, Stacked Mobile) */
     .video-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -231,20 +223,19 @@
       font-size: var(--fs-xs);
       font-weight: 600;
       color: var(--cream);
-      line-height: 1.4;
     }
 
-    /* Media Breakpoints for Mobile & Small Displays */
-    @media (max-width: 992px) {
-      .video-grid {
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      }
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
       .faithstream-promo {
         grid-template-columns: 1fr;
       }
+      .video-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 600px) {
       .founders-grid {
         grid-template-columns: 1fr;
       }
@@ -256,10 +247,9 @@
 </head>
 <body data-page="home">
 
-  <!-- Dynamic Navigation Injection Script -->
+  <!-- Inject Navbar JS -->
   <script src="assets/sidebar.js"></script>
 
-  <!-- Main Viewport Context -->
   <main class="bs-main">
     
     <!-- Hero Banner -->
@@ -286,11 +276,10 @@
       </div>
     </section>
 
-    <!-- Leadership / Our Founders -->
+    <!-- Founders Section -->
     <section>
       <h2 class="section-title">OUR FOUNDERS</h2>
       <div class="founders-grid">
-        
         <article class="founder-card">
           <img class="founder-img-wrapper" src="assets/img/kunle_falodun.jpg" alt="Pastor Kunle Falodun">
           <div class="founder-info">
@@ -306,11 +295,10 @@
             <span class="founder-role">Co-Founder</span>
           </div>
         </article>
-
       </div>
     </section>
 
-    <!-- About Us Section -->
+    <!-- About Section -->
     <section>
       <h2 class="section-title">A LITTLE ABOUT US</h2>
       <div class="about-card">
@@ -323,7 +311,7 @@
       </div>
     </section>
 
-    <!-- FaithStream Feature Promo -->
+    <!-- FaithStream Promo -->
     <section class="faithstream-promo">
       <div class="promo-content">
         <h3>Welcome to FaithStream</h3>
@@ -337,11 +325,10 @@
       </div>
     </section>
 
-    <!-- Launch & Featured Media (3 in 1 Row) -->
+    <!-- 3 YouTube Videos in 1 Row -->
     <section>
       <h2 class="section-title">FEATURED MEDIA & LAUNCH HIGHLIGHTS</h2>
       <div class="video-grid">
-        
         <div class="video-card">
           <iframe src="https://www.youtube.com/embed/placeholder1" title="Kunle Falodun on Faith, Media & Purpose" allowfullscreen></iframe>
           <div class="video-title">Kunle Falodun on Faith, Media & Purpose | FaithStream Launch Lagos</div>
@@ -356,20 +343,17 @@
           <iframe src="https://www.youtube.com/embed/placeholder3" title="FaithStream Launch Highlights" allowfullscreen></iframe>
           <div class="video-title">FaithStream Official Launch Highlights & Keynote Summary</div>
         </div>
-
       </div>
     </section>
 
-    <!-- Global Page Footer -->
+    <!-- Global Footer -->
     <footer class="bs-footer">
       <div>
         Want to learn more about House of Faith and FaithStream? Visit 
         <a href="https://ahouseoffaith.org" target="_blank" rel="noopener" style="color: var(--cream);">ahouseoffaith.org</a> or 
         <a href="https://thefaithstream.com" target="_blank" rel="noopener" style="color: var(--cream);">thefaithstream.com</a>
       </div>
-      <div>
-        House of Faith © 2026
-      </div>
+      <div>House of Faith © 2026</div>
     </footer>
 
   </main>
