@@ -1,29 +1,27 @@
 /* ==========================================================================
-   FAITHSTREAM / HOUSE OF FAITH DESIGN SYSTEM & STYLES
+   FAITHSTREAM / HOUSE OF FAITH DESIGN SYSTEM
    ========================================================================== */
 
 :root {
-  /* Color Palette */
+  /* Colors */
   --plum: #33152C;
   --plum-dark: #1E0B1A;
   --plum-black: #0A0A0F;
   --magenta: #E01E69;
-  --magenta-glow: rgba(224, 30, 105, 0.25);
   --lavender: #C29BB0;
   --lavender-muted: #8E7A8A;
   --cream: #FAF6F0;
 
-  /* UI Surface Colors */
+  /* Surfaces */
   --surface: #111118;
   --surface-card: #181822;
-  --surface-hover: #222230;
   --border-subtle: rgba(194, 155, 176, 0.15);
 
-  /* Typography */
+  /* Fonts */
   --font-display: 'Syne', sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
 
-  /* Fluid Type Scale */
+  /* Fluid Typography */
   --fs-xs: clamp(0.7rem, 0.65rem + 0.2vw, 0.75rem);
   --fs-sm: clamp(0.8rem, 0.75rem + 0.25vw, 0.875rem);
   --fs-base: clamp(0.9rem, 0.85rem + 0.3vw, 1rem);
@@ -34,7 +32,7 @@
   --fs-3xl: clamp(1.8rem, 1.5rem + 1.5vw, 2.5rem);
   --fs-4xl: clamp(2rem, 1.5rem + 2.5vw, 3.25rem);
 
-  /* Spacing Scale */
+  /* Spacing */
   --sp-1: 0.25rem;
   --sp-2: 0.5rem;
   --sp-3: 0.75rem;
@@ -45,21 +43,20 @@
   --sp-10: 2.5rem;
   --sp-12: 3rem;
 
-  /* Border Radii */
+  /* Radii */
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 16px;
   --radius-xl: 24px;
   --radius-full: 9999px;
 
-  /* Layout Dimensions */
+  /* Dimensions */
   --navbar-height: 72px;
   --max-width-content: 1200px;
   --transition-fast: 150ms ease;
-  --transition-normal: 250ms ease;
 }
 
-/* Base Styles */
+/* Reset & Base Setup */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -90,7 +87,7 @@ img, video, iframe {
   display: block;
 }
 
-/* Fluid Page Layout Container */
+/* Page Outer Container */
 .bs-main {
   width: 100%;
   max-width: var(--max-width-content);
@@ -101,14 +98,14 @@ img, video, iframe {
   padding-right: clamp(1rem, 4vw, 2rem);
 }
 
-/* Navbar Global Styles */
+/* Header Navbar Styles */
 .hof-navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   height: var(--navbar-height);
-  background: linear-gradient(180deg, var(--plum-dark) 0%, rgba(30, 11, 26, 0.95) 100%);
+  background: var(--plum-dark);
   border-bottom: 1px solid var(--border-subtle);
   backdrop-filter: blur(12px);
   z-index: 1000;
@@ -125,7 +122,114 @@ img, video, iframe {
   justify-content: space-between;
 }
 
-/* Buttons */
+.hof-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.hof-logo-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  background: var(--plum);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cream);
+  border: 1px solid var(--border-subtle);
+}
+
+.hof-brand-text {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-2);
+}
+
+.brand-title {
+  font-size: var(--fs-md);
+  font-weight: 500;
+  color: var(--cream);
+}
+
+.brand-subtitle {
+  font-family: var(--font-display);
+  font-size: var(--fs-lg);
+  font-weight: 800;
+  color: var(--cream);
+}
+
+.hof-nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-8);
+}
+
+.hof-nav-item {
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--lavender);
+  transition: color var(--transition-fast);
+}
+
+.hof-nav-item:hover,
+.hof-nav-item.active {
+  color: var(--cream);
+  font-weight: 700;
+}
+
+.hof-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.hof-search-btn,
+.hof-mobile-toggle {
+  background: transparent;
+  border: none;
+  color: var(--lavender);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-2);
+}
+
+.hof-search-btn:hover,
+.hof-mobile-toggle:hover {
+  color: var(--cream);
+}
+
+.hof-mobile-toggle {
+  display: none;
+}
+
+.hof-mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: var(--plum-dark);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: var(--sp-4) clamp(1rem, 4vw, 2rem);
+}
+
+.hof-mobile-menu.open {
+  display: flex;
+}
+
+.hof-mobile-link {
+  padding: var(--sp-3) 0;
+  color: var(--lavender);
+  font-size: var(--fs-base);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.hof-mobile-link.active {
+  color: var(--cream);
+  font-weight: 700;
+}
+
+/* UI Elements */
 .bs-btn {
   display: inline-flex;
   align-items: center;
@@ -149,7 +253,6 @@ img, video, iframe {
   background-color: #f12373;
 }
 
-/* Footer Responsive Layout */
 .bs-footer {
   margin-top: var(--sp-12);
   padding-top: var(--sp-8);
@@ -161,4 +264,14 @@ img, video, iframe {
   align-items: center;
   font-size: var(--fs-xs);
   color: var(--lavender-muted);
+}
+
+/* Mobile Breakpoints */
+@media (max-width: 768px) {
+  .hof-nav-links {
+    display: none;
+  }
+  .hof-mobile-toggle {
+    display: flex;
+  }
 }
