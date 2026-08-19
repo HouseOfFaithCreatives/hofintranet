@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>House of Faith Intranet - Home</title>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core Tokens & Layout CSS -->
+  <link rel="stylesheet" href="assets/tokens.css">
+
+  <style>
+    /* Home-Specific Component Styles */
+    .hero-banner {
+      background: linear-gradient(135deg, var(--plum-dark) 0%, var(--surface-card) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-10) var(--sp-8);
+      margin-bottom: var(--sp-8);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-banner::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, var(--magenta-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: var(--fs-4xl);
+      color: var(--text-primary);
+      margin-bottom: var(--sp-2);
+      letter-spacing: -0.02em;
+    }
+
+    .hero-subtitle {
+      font-size: var(--fs-lg);
+      color: var(--lavender-muted);
+      max-width: 600px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: var(--fs-xl);
+      color: var(--text-primary);
+      margin-bottom: var(--sp-6);
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+    }
+
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 20px;
+      background: var(--magenta);
+      border-radius: var(--radius-full);
+    }
+
+    /* Founders Grid */
+    .founders-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--sp-6);
+      margin-bottom: var(--sp-10);
+    }
+
+    .founder-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: transform var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .founder-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--lavender-muted);
+    }
+
+    .founder-img-wrapper {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      background: var(--plum-black);
+    }
+
+    .founder-info {
+      padding: var(--sp-5);
+    }
+
+    .founder-name {
+      font-family: var(--font-display);
+      font-size: var(--fs-lg);
+      color: var(--cream);
+      margin-bottom: var(--sp-1);
+    }
+
+    .founder-role {
+      font-size: var(--fs-sm);
+      color: var(--magenta);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* About Section */
+    .about-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-8);
+      margin-bottom: var(--sp-10);
+      line-height: var(--lh-relaxed);
+      color: var(--text-secondary);
+    }
+
+    .about-card p {
+      margin-bottom: var(--sp-4);
+    }
+
+    .about-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Feature Banner (FaithStream App) */
+    .faithstream-promo {
+      background: linear-gradient(135deg, var(--plum-black) 0%, var(--plum-dark) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--sp-8);
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: var(--sp-8);
+      align-items: center;
+      margin-bottom: var(--sp-10);
+    }
+
+    .promo-content h3 {
+      font-family: var(--font-display);
+      font-size: var(--fs-2xl);
+      color: var(--cream);
+      margin-bottom: var(--sp-3);
+    }
+
+    .promo-content p {
+      color: var(--text-muted);
+      margin-bottom: var(--sp-6);
+      font-size: var(--fs-base);
+    }
+
+    .promo-media iframe, 
+    .promo-media video {
+      width: 100%;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      aspect-ratio: 16 / 9;
+    }
+
+    /* Video Embeds Grid */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--sp-6);
+      margin-bottom: var(--sp-10);
+    }
+
+    .video-card {
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: var(--sp-4);
+    }
+
+    .video-card iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: var(--radius-sm);
+      border: none;
+      margin-bottom: var(--sp-3);
+    }
+
+    .video-title {
+      font-size: var(--fs-sm);
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 900px) {
+      .founders-grid,
+      .faithstream-promo,
+      .video-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body data-page="home">
+
+  <!-- Dynamic Shell Script (Injects Sidebar & Topbar) -->
+  <script src="assets/sidebar.js"></script>
+
+  <!-- Main Content Viewport -->
+  <main class="bs-main">
+    
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+      <h1 class="hero-title">House of Faith Intranet</h1>
+      <p class="hero-subtitle">Connecting team, purpose, and technology to transform Christian media across Africa and the global diaspora.</p>
+    </section>
+
+    <!-- Leadership / Our Founders -->
+    <section>
+      <h2 class="section-title">OUR FOUNDERS</h2>
+      <div class="founders-grid">
+        
+        <article class="founder-card">
+          <img class="founder-img-wrapper" src="assets/img/kunle_falodun.jpg" alt="Pastor Kunle Falodun">
+          <div class="founder-info">
+            <h3 class="founder-name">Pastor Kunle Falodun</h3>
+            <span class="founder-role">CEO / Co-Founder</span>
+          </div>
+        </article>
+
+        <article class="founder-card">
+          <img class="founder-img-wrapper" src="assets/img/hakeem_condotti.jpg" alt="Mr. Hakeem Condotti">
+          <div class="founder-info">
+            <h3 class="founder-name">Mr. Hakeem Condotti</h3>
+            <span class="founder-role">Co-Founder</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section>
+      <h2 class="section-title">A LITTLE ABOUT US</h2>
+      <div class="about-card">
+        <p>
+          House of Faith is a faith-based media and technology company founded by Pastor Kunle Falodun and Hakeem Condotti. The organization is committed to transforming Christian entertainment through world-class storytelling, innovative technology, and purpose-driven content that reflects biblical values and authentic African perspectives.
+        </p>
+        <p>
+          Through films, television series, podcasts, devotionals, books, live events, and digital platforms, House of Faith is building an ecosystem that inspires, uplifts, and connects audiences across Africa and the global diaspora.
+        </p>
+      </div>
+    </section>
+
+    <!-- FaithStream Feature Promo -->
+    <section class="faithstream-promo">
+      <div class="promo-content">
+        <h3>Welcome to FaithStream</h3>
+        <p>
+          FaithStream, House of Faith's flagship streaming platform, brings together inspiring, family-friendly Christian content in one place. Download the app from the Google Play Store or Apple App Store to enjoy movies, series, devotionals, and more anytime, anywhere.
+        </p>
+        <a href="https://thefaithstream.com" target="_blank" rel="noopener" class="bs-btn bs-btn-primary">Visit FaithStream</a>
+      </div>
+      <div class="promo-media">
+        <iframe src="https://www.youtube.com/embed/placeholder" title="FaithStream Overview" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <!-- Launch & Featured Media -->
+    <section>
+      <h2 class="section-title">FEATURED MEDIA & LAUNCH HIGHLIGHTS</h2>
+      <div class="video-grid">
+        
+        <div class="video-card">
+          <iframe src="https://www.youtube.com/embed/placeholder1" title="Kunle Falodun on Faith, Media & Purpose" allowfullscreen></iframe>
+          <div class="video-title">Kunle Falodun on Faith, Media & Purpose | FaithStream Launch Lagos</div>
+        </div>
+
+        <div class="video-card">
+          <iframe src="https://www.youtube.com/embed/placeholder2" title="Tinuke Adewunmi Talks About FaithStream" allowfullscreen></iframe>
+          <div class="video-title">Tinuke Adewunmi Talks About FaithStream At The Launch In Lagos</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Global Page Footer -->
+    <footer class="bs-footer">
+      <div class="bs-footer-links">
+        Want to learn more about House of Faith and FaithStream? Visit 
+        <a href="https://ahouseoffaith.org" target="_blank" rel="noopener">ahouseoffaith.org</a> or 
+        <a href="https://thefaithstream.com" target="_blank" rel="noopener">thefaithstream.com</a>
+      </div>
+      <div class="bs-footer-copy">
+        House of Faith © 2026
+      </div>
+    </footer>
+
+  </main>
+
+</body>
+</html>
