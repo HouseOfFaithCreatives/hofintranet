@@ -54,6 +54,7 @@
 
   /* Layout Dimensions */
   --navbar-height: 72px;
+  --max-width-content: 1200px;
   --transition-fast: 150ms ease;
   --transition-normal: 250ms ease;
 }
@@ -79,15 +80,20 @@ a {
   text-decoration: none;
 }
 
-/* Main Container Offset */
+img, video, iframe {
+  max-width: 100%;
+  display: block;
+}
+
+/* Page Layout Container Alignment */
 .bs-main {
-  margin-left: 0;
+  width: 100%;
+  max-width: var(--max-width-content);
+  margin: 0 auto;
   padding-top: calc(var(--navbar-height) + var(--sp-8));
   padding-bottom: var(--sp-12);
-  padding-left: var(--sp-8);
-  padding-right: var(--sp-8);
-  max-width: 1400px;
-  margin-right: auto;
+  padding-left: var(--sp-6);
+  padding-right: var(--sp-6);
 }
 
 /* ==========================================================================
@@ -107,10 +113,11 @@ a {
 }
 
 .hof-nav-container {
-  max-width: 1400px;
+  width: 100%;
+  max-width: var(--max-width-content);
   height: 100%;
   margin: 0 auto;
-  padding: 0 var(--sp-8);
+  padding: 0 var(--sp-6);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -223,7 +230,7 @@ a {
   flex-direction: column;
   background: var(--plum-dark);
   border-bottom: 1px solid var(--border-subtle);
-  padding: var(--sp-4) var(--sp-8);
+  padding: var(--sp-4) var(--sp-6);
 }
 
 .hof-mobile-menu.open {
@@ -242,7 +249,7 @@ a {
   font-weight: 700;
 }
 
-/* Utility Buttons */
+/* Buttons System */
 .bs-btn {
   display: inline-flex;
   align-items: center;
