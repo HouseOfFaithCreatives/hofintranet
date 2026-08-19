@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team — House of Faith Intranet</title>
+<link rel="icon" type="image/png" href="assets/logo/faithstream_favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  /* Department buttons */
+  .dept-grid {
+    max-width: 720px; margin: 0 auto;
+    display: flex; flex-direction: column; gap: var(--sp-3);
+  }
+  .dept-group + .dept-group { margin-top: var(--sp-5); }
+  .dept-group { display: flex; flex-direction: column; gap: var(--sp-3); }
+  .dept-btn {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 16px 24px; border-radius: var(--radius-md);
+    background: var(--surface2); border: 1px solid var(--border);
+    font-size: 15px; font-weight: 600; color: var(--cream);
+    transition: background 0.18s, border-color 0.18s, transform 0.18s;
+  }
+  .dept-btn:hover {
+    background: rgba(155,47,135,0.14); border-color: rgba(155,47,135,0.5);
+    transform: translateY(-1px);
+  }
+  .dept-btn .arrow { color: var(--magenta); font-weight: 700; transition: transform 0.18s; }
+  .dept-btn:hover .arrow { transform: translateX(3px); }
+  .team-quote {
+    text-align: center; font-style: italic;
+    font-size: clamp(15px, 2vw, 18px); color: var(--dim);
+    max-width: 640px; margin: 0 auto var(--sp-12);
+  }
+  .team-quote strong { color: var(--cream); font-weight: 600; }
+  /* Team grid */
+  .team-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6);
+  }
+  .team-grid .person-photo { aspect-ratio: 1 / 1; }
+  .team-grid .person-photo img { object-position: center 22%; }
+  .team-grid .person-name { font-size: 18px; }
+  .team-grid .person-role { font-size: 11px; }
+  .photo-placeholder {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+    background:
+      radial-gradient(360px 220px at 60% 15%, rgba(155,47,135,0.22), transparent 65%),
+      linear-gradient(150deg, #1E1126, var(--plum));
+  }
+  .photo-placeholder img { height: 54px; width: auto; opacity: 0.6; }
+  .photo-placeholder span {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--dim);
+  }
+  @media (max-width: 900px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) { .team-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; } }
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">
+      <img src="assets/logo/faithstream_icon_white.png" alt="House of Faith">
+      <span class="nav-brand-name">House of Faith</span>
+      <span class="nav-brand-tag">Intranet</span>
+    </a>
+    <nav class="nav-links">
+      <a class="nav-link" href="index.html">Home</a>
+      <div class="nav-item">
+        <a class="nav-link active" href="team.html">Team <span class="caret">&#9662;</span></a>
+        <div class="dropdown">
+          <a href="team.html#departments">Departments</a>
+          <a href="team.html#meet-the-team">Meet the Team</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a class="nav-link" href="management.html">Management <span class="caret">&#9662;</span></a>
+        <div class="dropdown">
+          <a href="management.html">MGT Team</a>
+          <a href="management.html#documents">Documents</a>
+        </div>
+      </div>
+    </nav>
+    <div class="nav-burger" id="burger" role="button" aria-label="Menu" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <div class="group-label">Team</div>
+    <a class="sub active" href="team.html#departments">Departments</a>
+    <a class="sub" href="team.html#meet-the-team">Meet the Team</a>
+    <div class="group-label">Management</div>
+    <a class="sub" href="management.html">MGT Team</a>
+    <a class="sub" href="management.html#documents">Documents</a>
+  </div>
+</header>
+
+<!-- ══ HERO ══ -->
+<section class="hero page-hero">
+  <img class="hero-mark" src="assets/logo/faithstream_icon_white.png" alt="" aria-hidden="true">
+  <div class="hero-inner">
+    <div class="hero-kicker">House of Faith</div>
+    <div class="hero-frame">
+      <h1 class="hero-title">Team</h1>
+    </div>
+  </div>
+</section>
+
+<!-- ══ DEPARTMENTS ══ -->
+<section class="section" id="departments">
+  <div class="container">
+    <p class="team-quote">&ldquo;Easily navigate through your department and get all needed information&rdquo;</p>
+    <div class="dept-grid">
+      <div class="dept-group">
+        <a class="dept-btn" href="#meet-the-team">HR Department <span class="arrow">&rarr;</span></a>
+        <a class="dept-btn" href="#meet-the-team">Tech Department <span class="arrow">&rarr;</span></a>
+        <a class="dept-btn" href="#meet-the-team">Content <span class="arrow">&rarr;</span></a>
+      </div>
+      <div class="dept-group">
+        <a class="dept-btn" href="#meet-the-team">Fundraising <span class="arrow">&rarr;</span></a>
+        <a class="dept-btn" href="#meet-the-team">Marketing <span class="arrow">&rarr;</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MEET THE TEAM ══ -->
+<section class="section" id="meet-the-team">
+  <div class="container">
+    <div class="section-kicker">The People</div>
+    <h2 class="section-title">Meet the Team</h2>
+    <div class="team-grid">
+      <article class="person-card">
+        <div class="person-photo"><img src="assets/img/pelumi.jpg" alt="Aluko Pelumi"></div>
+        <div class="person-info">
+          <h3 class="person-name">Aluko Pelumi</h3>
+          <div class="person-role">Tech Product Lead</div>
+        </div>
+      </article>
+      <article class="person-card">
+        <div class="person-photo">
+          <div class="photo-placeholder">
+            <img src="assets/logo/faithstream_icon_white.png" alt="">
+            <span>Photo coming soon</span>
+          </div>
+        </div>
+        <div class="person-info">
+          <h3 class="person-name">Bassey Wisdom</h3>
+          <div class="person-role">Graphics Designer Intern</div>
+        </div>
+      </article>
+      <article class="person-card">
+        <div class="person-photo"><img src="assets/img/esther.jpg" alt="Apata Esther"></div>
+        <div class="person-info">
+          <h3 class="person-name">Apata Esther</h3>
+          <div class="person-role">Executive Assistant</div>
+        </div>
+      </article>
+      <article class="person-card">
+        <div class="person-photo"><img src="assets/img/nifemi.jpg" alt="Adeniran Oluwanifemi"></div>
+        <div class="person-info">
+          <h3 class="person-name">Adeniran Oluwanifemi</h3>
+          <div class="person-role">Graphics Designer</div>
+        </div>
+      </article>
+      <article class="person-card">
+        <div class="person-photo"><img src="assets/img/james.jpg" alt="Echendu James"></div>
+        <div class="person-info">
+          <h3 class="person-name">Echendu James</h3>
+          <div class="person-role">Video Editor</div>
+        </div>
+      </article>
+      <article class="person-card">
+        <div class="person-photo"><img src="assets/img/christabel.jpg" alt="Oragui Christabel"></div>
+        <div class="person-info">
+          <h3 class="person-name">Oragui Christabel</h3>
+          <div class="person-role">Social Media Manager</div>
+        </div>
+      </article>
+      <article class="person-card">
+        <div class="person-photo"><img src="assets/img/dami.jpg" alt="Awokoya Dami"></div>
+        <div class="person-info">
+          <h3 class="person-name">Awokoya Dami</h3>
+          <div class="person-role">People &amp; Culture Consultant</div>
+        </div>
+      </article>
+      <article class="person-card">
+        <div class="person-photo"><img src="assets/img/deola.jpg" alt="Fawekun Deola"></div>
+        <div class="person-info">
+          <h3 class="person-name">Fawekun Deola</h3>
+          <div class="person-role">Fundraising Admin / Finance Coord.</div>
+        </div>
+      </article>
+      <article class="person-card">
+        <div class="person-photo"><img src="assets/img/tobi.jpg" alt="Omotayo Oluwatobi"></div>
+        <div class="person-info">
+          <h3 class="person-name">Omotayo Oluwatobi</h3>
+          <div class="person-role">Digital Tech &amp; Marketing Coordinator</div>
+        </div>
+      </article>
+      <article class="person-card">
+        <div class="person-photo"><img src="assets/img/teni.jpg" alt="Zara-King Teni"></div>
+        <div class="person-info">
+          <h3 class="person-name">Zara-King Teni</h3>
+          <div class="person-role">Chief of Content</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <p class="footer-links">Want to learn more about House of Faith and FaithStream?<br>Visit <a href="https://ahouseoffaith.org" target="_blank" rel="noopener">ahouseoffaith.org</a> or <a href="https://thefaithstream.com" target="_blank" rel="noopener">thefaithstream.com</a></p>
+    <div class="socials">
+      <a class="social-btn" href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45z"/></svg></a>
+      <a class="social-btn" href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.7.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95C23.73 2.7 21.31.27 16.95.07 15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zm0 10.15a4 4 0 1 1 0-7.99 4 4 0 0 1 0 7.99zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg></a>
+      <a class="social-btn" href="https://www.tiktok.com" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+      <a class="social-btn" href="https://x.com" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.24 2.25h3.31l-7.23 8.26L22.83 21.75h-6.66l-5.22-6.82-5.97 6.82H1.67l7.73-8.84L1.25 2.25h6.83l4.72 6.24 5.44-6.24zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64z"/></svg></a>
+      <a class="social-btn" href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.09 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.55-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.49h-2.8V24C19.61 23.09 24 18.1 24 12.07z"/></svg></a>
+      <a class="social-btn" href="https://www.youtube.com/@thefaithstream" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg></a>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <div class="footer-bar-inner">
+      <span class="footer-copy">House of Faith &copy; 2026</span>
+      <span class="footer-mark"><img src="assets/logo/faithstream_icon_white.png" alt="">Powered by FaithStream</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const burger = document.getElementById('burger');
+  const menu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    menu.classList.toggle('open');
+  });
+</script>
+</body>
+</html>
