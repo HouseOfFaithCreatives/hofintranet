@@ -230,3 +230,140 @@ img, video {
     align-items: flex-start;
   }
 }
+
+/* ==========================================================================
+   NAVIGATION COMPONENTS (TOPBAR, SIDEBAR & DRAWER)
+   ========================================================================== */
+
+/* Fixed Desktop Sidebar */
+.bs-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: var(--sidebar-width-desktop);
+  background-color: var(--surface-card);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  transition: width var(--transition-normal), transform var(--transition-normal);
+}
+
+.bs-sidebar-header {
+  padding: var(--sp-6) var(--sp-6) var(--sp-4);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.bs-sidebar-logo {
+  height: 28px;
+  width: auto;
+}
+
+.bs-sidebar-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-md);
+  font-weight: 700;
+  color: var(--cream);
+}
+
+/* Nav Items & Active States */
+.bs-nav {
+  padding: var(--sp-4) var(--sp-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  flex-grow: 1;
+}
+
+.bs-nav-link {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  color: var(--text-secondary);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.bs-nav-link:hover {
+  color: var(--cream);
+  background-color: var(--surface-hover);
+}
+
+.bs-nav-link.active {
+  color: var(--cream);
+  background-color: var(--plum);
+  border-left: 3px solid var(--magenta);
+  font-weight: 600;
+}
+
+/* Mobile & Tablet Topbar (Hide on Desktop) */
+.bs-topbar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--topbar-height-mobile);
+  background-color: var(--surface-card);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0 var(--sp-4);
+  align-items: center;
+  justify-content: space-between;
+  z-index: 90;
+}
+
+.bs-menu-btn {
+  background: transparent;
+  border: none;
+  color: var(--cream);
+  font-size: var(--fs-xl);
+  cursor: pointer;
+  padding: var(--sp-2);
+}
+
+.bs-drawer-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(10, 10, 15, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 95;
+}
+
+.bs-drawer-backdrop.open {
+  display: block;
+}
+
+/* ------------------------------------------------------------------------
+   RESPONSIVE NAVBAR BREAKPOINTS
+   ------------------------------------------------------------------------ */
+
+@media (max-width: 1279px) and (min-width: 1101px) {
+  .bs-sidebar {
+    width: var(--sidebar-width-laptop);
+  }
+}
+
+@media (max-width: 1100px) {
+  .bs-topbar {
+    display: flex;
+  }
+
+  .bs-sidebar {
+    transform: translateX(-100%);
+    width: 280px;
+    z-index: 100;
+  }
+
+  .bs-sidebar.open {
+    transform: translateX(0);
+    box-shadow: var(--shadow-md);
+  }
+}
