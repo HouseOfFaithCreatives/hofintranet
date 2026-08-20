@@ -76,19 +76,21 @@
         <a class="nav-link active" href="team.html">Team <span class="caret">&#9662;</span></a>
         <div class="dropdown">
           <a href="team.html#meet-the-team">Meet the Team</a>
-          <a href="hr.html">HR Department</a>
+          <a href="hr.html">HR</a>
+          <a href="tech.html">Tech</a>
           <a href="content.html">Content</a>
-          <a href="tech.html">Tech Department</a>
           <a href="fundraising.html">Fundraising</a>
           <a href="marketing.html">Marketing</a>
-          <a href="design.html">Design</a>
+          <a href="ops.html">Ops</a>
+          <a href="executive-office.html">Executive Office</a>
         </div>
       </div>
       <div class="nav-item">
         <a class="nav-link" href="management.html">Management <span class="caret">&#9662;</span></a>
         <div class="dropdown">
-          <a href="management.html">MGT Team</a>
+          <a href="management.html#mgt-team">MGT Team</a>
           <a href="management.html#documents">Documents</a>
+          <a href="management.html#offsite">HOF Offsite</a>
         </div>
       </div>
     </nav>
@@ -97,17 +99,18 @@
     </div>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html">Home</a>
+    <a class="" href="index.html">Home</a>
     <div class="group-label">Team</div>
     <a class="sub" href="team.html#meet-the-team">Meet the Team</a>
-    <a class="sub" href="hr.html">HR Department</a>
+    <a class="sub" href="hr.html">HR</a>
+    <a class="sub" href="tech.html">Tech</a>
     <a class="sub" href="content.html">Content</a>
-    <a class="sub" href="tech.html">Tech Department</a>
     <a class="sub" href="fundraising.html">Fundraising</a>
     <a class="sub" href="marketing.html">Marketing</a>
-    <a class="sub" href="design.html">Design</a>
+    <a class="sub" href="ops.html">Ops</a>
+    <a class="sub" href="executive-office.html">Executive Office</a>
     <div class="group-label">Management</div>
-    <a class="sub" href="management.html">MGT Team</a>
+    <a class="sub" href="management.html#mgt-team">MGT Team</a>
     <a class="sub" href="management.html#documents">Documents</a>
   </div>
 </header>
@@ -129,14 +132,15 @@
     <p class="team-quote">&ldquo;Easily navigate through your department and get all needed information&rdquo;</p>
     <div class="dept-grid">
       <div class="dept-group">
-        <a class="dept-btn" href="hr.html">HR Department <span class="arrow">&rarr;</span></a>
-        <a class="dept-btn" href="tech.html">Tech Department <span class="arrow">&rarr;</span></a>
+        <a class="dept-btn" href="hr.html">HR <span class="arrow">&rarr;</span></a>
+        <a class="dept-btn" href="tech.html">Tech <span class="arrow">&rarr;</span></a>
         <a class="dept-btn" href="content.html">Content <span class="arrow">&rarr;</span></a>
+        <a class="dept-btn" href="fundraising.html">Fundraising <span class="arrow">&rarr;</span></a>
       </div>
       <div class="dept-group">
-        <a class="dept-btn" href="fundraising.html">Fundraising <span class="arrow">&rarr;</span></a>
         <a class="dept-btn" href="marketing.html">Marketing <span class="arrow">&rarr;</span></a>
-        <a class="dept-btn" href="design.html">Design <span class="arrow">&rarr;</span></a>
+        <a class="dept-btn" href="ops.html">Ops <span class="arrow">&rarr;</span></a>
+        <a class="dept-btn" href="executive-office.html">Executive Office <span class="arrow">&rarr;</span></a>
       </div>
     </div>
   </div>
@@ -164,7 +168,7 @@
         </div>
         <div class="person-info">
           <h3 class="person-name">Bassey Wisdom</h3>
-          <div class="person-role">Visual Design Intern</div>
+          <div class="person-role">Graphics Designer Intern</div>
         </div>
       </article>
       <article class="person-card">
@@ -178,7 +182,7 @@
         <div class="person-photo"><img src="assets/img/nifemi.jpg" alt="Adeniran Oluwanifemi"></div>
         <div class="person-info">
           <h3 class="person-name">Adeniran Oluwanifemi</h3>
-          <div class="person-role">Visual/Brand Designer</div>
+          <div class="person-role">Graphics Designer</div>
         </div>
       </article>
       <article class="person-card">
@@ -223,6 +227,20 @@
           <div class="person-role">Chief of Content</div>
         </div>
       </article>
+      <article class="person-card">
+        <div class="person-photo"><img src="assets/img/drivy.jpg" alt="Dr Ivy"></div>
+        <div class="person-info">
+          <h3 class="person-name">Dr Ivy</h3>
+          <div class="person-role">Operations</div>
+        </div>
+      </article>
+      <article class="person-card">
+        <div class="person-photo"><img src="assets/img/tinuke_portrait.jpg" alt="Tinuke Oloko"></div>
+        <div class="person-info">
+          <h3 class="person-name">Tinuke Oloko</h3>
+          <div class="person-role">Chief of Staff</div>
+        </div>
+      </article>
     </div>
   </div>
 </section>
@@ -248,13 +266,6 @@
   </div>
 </footer>
 
-<script>
-  const burger = document.getElementById('burger');
-  const menu = document.getElementById('mobileMenu');
-  burger.addEventListener('click', () => {
-    burger.classList.toggle('open');
-    menu.classList.toggle('open');
-  });
-</script>
+<script src="assets/viewer.js"></script>
 </body>
 </html>

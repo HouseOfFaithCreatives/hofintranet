@@ -11,6 +11,12 @@
 <link rel="stylesheet" href="assets/style.css">
 <style>
   .dept-hero .hero-inner { padding: 76px var(--sp-6) 84px; }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 600; color: var(--dim);
+    margin-bottom: var(--sp-6); transition: color 0.16s;
+  }
+  .back-link:hover { color: var(--cream); }
   .lead-callout {
     max-width: 720px; margin: 0 auto var(--sp-12);
     display: flex; align-items: center; gap: var(--sp-5);
@@ -27,17 +33,16 @@
   }
   .lead-name { font-family: var(--font-display); font-weight: 700; font-size: 19px; color: #fff; }
   .lead-role { font-size: 13px; color: var(--dim); margin-top: 2px; }
-  /* Document cards */
-  .doc-cards { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--sp-3); }
+  .doc-cards { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--sp-3); }
   .doc-card {
     display: flex; align-items: center; gap: var(--sp-4);
     background: var(--surface); border: 1px solid var(--border);
     border-radius: var(--radius-lg); padding: var(--sp-4) var(--sp-5);
     transition: transform 0.18s, border-color 0.18s, background 0.18s;
   }
-  .doc-card:hover {
+  .doc-card:hover, .doc-card:focus-visible {
     transform: translateY(-2px); border-color: rgba(155,47,135,0.45);
-    background: rgba(155,47,135,0.05);
+    background: rgba(155,47,135,0.05); outline: none;
   }
   .doc-card-icon {
     width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
@@ -47,36 +52,50 @@
   .doc-card-icon svg { width: 20px; height: 20px; fill: var(--lavender-light); }
   .doc-card-body { min-width: 0; flex: 1; }
   .doc-card-title { font-size: 14.5px; font-weight: 700; color: var(--cream); line-height: 1.4; }
-  .doc-card-meta { font-size: 12px; color: var(--dim2); margin-top: 3px; font-family: var(--font-mono, monospace); }
+  .doc-card-desc { font-size: 13px; color: var(--dim); margin-top: 4px; line-height: 1.5; }
+  .doc-card-meta { font-size: 11px; color: var(--dim2); margin-top: 6px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 600; }
   .doc-card-open {
     flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px;
-    font-size: 12.5px; font-weight: 700; color: var(--magenta);
-    letter-spacing: 0.03em; white-space: nowrap;
+    font-size: 12.5px; font-weight: 700; color: var(--magenta); white-space: nowrap;
   }
   .doc-card:hover .doc-card-open { color: #B23FA0; }
-  .back-link {
+  .docs-toolbar { max-width: 800px; margin: 0 auto var(--sp-4); display: flex; justify-content: flex-end; }
+  .drive-link {
     display: inline-flex; align-items: center; gap: 8px;
-    font-size: 13px; font-weight: 600; color: var(--dim);
-    margin-bottom: var(--sp-6); transition: color 0.16s;
+    font-size: 13px; font-weight: 700; color: var(--magenta);
+    padding: 8px 14px; border: 1px solid rgba(155,47,135,0.35);
+    border-radius: var(--radius-md); background: rgba(155,47,135,0.08);
+    transition: background 0.16s, color 0.16s;
   }
-  .back-link:hover { color: var(--cream); }
-  @media (max-width: 560px) {
-    .doc-card { flex-wrap: wrap; }
-    .doc-card-open { margin-left: 60px; }
-  }
+  .drive-link:hover { background: rgba(155,47,135,0.16); color: #B23FA0; }
+  .drive-link svg { width: 15px; height: 15px; fill: currentColor; }
   .doc-empty {
+    max-width: 800px; margin: 0 auto;
     border: 1px dashed rgba(155,47,135,0.4); border-radius: var(--radius-xl);
     padding: var(--sp-16) var(--sp-8); text-align: center;
     display: flex; flex-direction: column; align-items: center; gap: var(--sp-3);
   }
   .doc-empty img { height: 46px; width: auto; opacity: 0.45; margin-bottom: var(--sp-2); }
   .doc-empty-title { font-family: var(--font-display); font-weight: 700; font-size: 19px; color: var(--cream); }
-  .doc-empty-text { font-size: 14px; line-height: 1.65; color: var(--dim); max-width: 440px; }
+  .doc-empty-text { font-size: 14px; line-height: 1.65; color: var(--dim); max-width: 460px; }
+  .dept-team-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6);
+    max-width: 880px; margin: 0 auto;
+  }
+  .dept-team-grid .person-photo { aspect-ratio: 1 / 1; }
+  .dept-team-grid .person-photo img { object-position: center 20%; }
+  .dept-team-grid .person-name { font-size: 17px; }
+  .dropdown a.is-current { color: var(--cream); background: rgba(155,47,135,0.12); }
+  @media (max-width: 860px) { .dept-team-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 560px) {
+    .dept-team-grid { grid-template-columns: 1fr; max-width: 380px; }
+    .doc-card { flex-wrap: wrap; }
+    .doc-card-open { margin-left: 60px; }
+  }
 </style>
 </head>
 <body>
 
-<!-- ══ NAV ══ -->
 <header class="nav">
   <div class="nav-inner">
     <a class="nav-brand" href="index.html">
@@ -90,19 +109,21 @@
         <a class="nav-link active" href="team.html">Team <span class="caret">&#9662;</span></a>
         <div class="dropdown">
           <a href="team.html#meet-the-team">Meet the Team</a>
-          <a href="hr.html">HR Department</a>
+          <a href="hr.html">HR</a>
+          <a href="tech.html" class="is-current">Tech</a>
           <a href="content.html">Content</a>
-          <a href="tech.html" style="color:var(--cream)">Tech Department</a>
           <a href="fundraising.html">Fundraising</a>
           <a href="marketing.html">Marketing</a>
-          <a href="design.html">Design</a>
+          <a href="ops.html">Ops</a>
+          <a href="executive-office.html">Executive Office</a>
         </div>
       </div>
       <div class="nav-item">
         <a class="nav-link" href="management.html">Management <span class="caret">&#9662;</span></a>
         <div class="dropdown">
-          <a href="management.html">MGT Team</a>
+          <a href="management.html#mgt-team">MGT Team</a>
           <a href="management.html#documents">Documents</a>
+          <a href="management.html#offsite">HOF Offsite</a>
         </div>
       </div>
     </nav>
@@ -111,22 +132,22 @@
     </div>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html">Home</a>
+    <a class="" href="index.html">Home</a>
     <div class="group-label">Team</div>
     <a class="sub" href="team.html#meet-the-team">Meet the Team</a>
-    <a class="sub" href="hr.html">HR Department</a>
+    <a class="sub" href="hr.html">HR</a>
+    <a class="sub active" href="tech.html">Tech</a>
     <a class="sub" href="content.html">Content</a>
-    <a class="sub" href="tech.html">Tech Department</a>
     <a class="sub" href="fundraising.html">Fundraising</a>
     <a class="sub" href="marketing.html">Marketing</a>
-    <a class="sub" href="design.html">Design</a>
+    <a class="sub" href="ops.html">Ops</a>
+    <a class="sub" href="executive-office.html">Executive Office</a>
     <div class="group-label">Management</div>
-    <a class="sub" href="management.html">MGT Team</a>
+    <a class="sub" href="management.html#mgt-team">MGT Team</a>
     <a class="sub" href="management.html#documents">Documents</a>
   </div>
 </header>
 
-<!-- ══ HERO ══ -->
 <section class="hero dept-hero">
   <img class="hero-mark" src="assets/logo/faithstream_icon_white.png" alt="" aria-hidden="true">
   <div class="hero-inner">
@@ -137,7 +158,6 @@
   </div>
 </section>
 
-<!-- ══ CONTENT ══ -->
 <section class="section">
   <div class="container">
     <a class="back-link" href="team.html#departments">&larr; Back to all departments</a>
@@ -154,17 +174,22 @@
     <div class="section-kicker">Resources</div>
     <h2 class="section-title">Department Documents</h2>
 
-    <div class="doc-cards">
-      <div class="doc-empty">
-        <img src="assets/logo/faithstream_icon_white.png" alt="">
-        <div class="doc-empty-title">Documents coming soon</div>
-        <p class="doc-empty-text">This department&rsquo;s files haven&rsquo;t been added yet. Once they&rsquo;re ready, they&rsquo;ll appear here with direct Google&nbsp;Drive links &mdash; just like the Marketing page.</p>
-      </div>
+    <div class="docs-toolbar">
+      <a class="drive-link" href="https://drive.google.com/drive/folders/10-go5zpoTV5qYKTZngBMwdDkj6RbHrTe" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2z"/></svg>
+        Open folder in Drive
+      </a>
+    </div>
+
+    <div class="doc-empty">
+      <img src="assets/logo/faithstream_icon_white.png" alt="">
+      <div class="doc-empty-title">Documents coming soon</div>
+      <p class="doc-empty-text">This department&rsquo;s files haven&rsquo;t been added yet. Once they land in the Drive folder, they&rsquo;ll appear here &mdash; readable right on this page.</p>
     </div>
   </div>
 </section>
 
-<!-- ══ FOOTER ══ -->
+
 <footer class="footer">
   <div class="footer-inner">
     <p class="footer-links">Want to learn more about House of Faith and FaithStream?<br>Visit <a href="https://ahouseoffaith.org" target="_blank" rel="noopener">ahouseoffaith.org</a> or <a href="https://thefaithstream.com" target="_blank" rel="noopener">thefaithstream.com</a></p>
@@ -185,13 +210,27 @@
   </div>
 </footer>
 
-<script>
-  const burger = document.getElementById('burger');
-  const menu = document.getElementById('mobileMenu');
-  burger.addEventListener('click', () => {
-    burger.classList.toggle('open');
-    menu.classList.toggle('open');
-  });
-</script>
+<!-- ══ DOCUMENT VIEWER ══ -->
+<div class="dv-overlay" id="docViewer" role="dialog" aria-modal="true" aria-label="Document viewer">
+  <div class="dv-modal">
+    <div class="dv-head">
+      <div class="dv-head-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 12h8v1.5H8V12zm0 3h8v1.5H8V15z"/></svg></div>
+      <div class="dv-head-body">
+        <div class="dv-title"></div>
+        <div class="dv-sub"></div>
+      </div>
+      <div class="dv-close" role="button" tabindex="0" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></div>
+    </div>
+    <div class="dv-body"></div>
+    <div class="dv-foot">
+      <a class="dv-btn primary" data-dv="drive" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2z"/></svg>Open in Drive</a>
+      <a class="dv-btn ghost" data-dv="download"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>Download</a>
+      <span class="dv-foot-note">Press Esc to close</span>
+    </div>
+  </div>
+</div>
+
+
+<script src="assets/viewer.js"></script>
 </body>
 </html>

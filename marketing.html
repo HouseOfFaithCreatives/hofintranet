@@ -11,6 +11,12 @@
 <link rel="stylesheet" href="assets/style.css">
 <style>
   .dept-hero .hero-inner { padding: 76px var(--sp-6) 84px; }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 600; color: var(--dim);
+    margin-bottom: var(--sp-6); transition: color 0.16s;
+  }
+  .back-link:hover { color: var(--cream); }
   .lead-callout {
     max-width: 720px; margin: 0 auto var(--sp-12);
     display: flex; align-items: center; gap: var(--sp-5);
@@ -27,17 +33,16 @@
   }
   .lead-name { font-family: var(--font-display); font-weight: 700; font-size: 19px; color: #fff; }
   .lead-role { font-size: 13px; color: var(--dim); margin-top: 2px; }
-  /* Document cards */
-  .doc-cards { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--sp-3); }
+  .doc-cards { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--sp-3); }
   .doc-card {
     display: flex; align-items: center; gap: var(--sp-4);
     background: var(--surface); border: 1px solid var(--border);
     border-radius: var(--radius-lg); padding: var(--sp-4) var(--sp-5);
     transition: transform 0.18s, border-color 0.18s, background 0.18s;
   }
-  .doc-card:hover {
+  .doc-card:hover, .doc-card:focus-visible {
     transform: translateY(-2px); border-color: rgba(155,47,135,0.45);
-    background: rgba(155,47,135,0.05);
+    background: rgba(155,47,135,0.05); outline: none;
   }
   .doc-card-icon {
     width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0;
@@ -47,20 +52,43 @@
   .doc-card-icon svg { width: 20px; height: 20px; fill: var(--lavender-light); }
   .doc-card-body { min-width: 0; flex: 1; }
   .doc-card-title { font-size: 14.5px; font-weight: 700; color: var(--cream); line-height: 1.4; }
-  .doc-card-meta { font-size: 12px; color: var(--dim2); margin-top: 3px; font-family: var(--font-mono, monospace); }
+  .doc-card-desc { font-size: 13px; color: var(--dim); margin-top: 4px; line-height: 1.5; }
+  .doc-card-meta { font-size: 11px; color: var(--dim2); margin-top: 6px; letter-spacing: 0.05em; text-transform: uppercase; font-weight: 600; }
   .doc-card-open {
     flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px;
-    font-size: 12.5px; font-weight: 700; color: var(--magenta);
-    letter-spacing: 0.03em; white-space: nowrap;
+    font-size: 12.5px; font-weight: 700; color: var(--magenta); white-space: nowrap;
   }
   .doc-card:hover .doc-card-open { color: #B23FA0; }
-  .back-link {
+  .docs-toolbar { max-width: 800px; margin: 0 auto var(--sp-4); display: flex; justify-content: flex-end; }
+  .drive-link {
     display: inline-flex; align-items: center; gap: 8px;
-    font-size: 13px; font-weight: 600; color: var(--dim);
-    margin-bottom: var(--sp-6); transition: color 0.16s;
+    font-size: 13px; font-weight: 700; color: var(--magenta);
+    padding: 8px 14px; border: 1px solid rgba(155,47,135,0.35);
+    border-radius: var(--radius-md); background: rgba(155,47,135,0.08);
+    transition: background 0.16s, color 0.16s;
   }
-  .back-link:hover { color: var(--cream); }
+  .drive-link:hover { background: rgba(155,47,135,0.16); color: #B23FA0; }
+  .drive-link svg { width: 15px; height: 15px; fill: currentColor; }
+  .doc-empty {
+    max-width: 800px; margin: 0 auto;
+    border: 1px dashed rgba(155,47,135,0.4); border-radius: var(--radius-xl);
+    padding: var(--sp-16) var(--sp-8); text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: var(--sp-3);
+  }
+  .doc-empty img { height: 46px; width: auto; opacity: 0.45; margin-bottom: var(--sp-2); }
+  .doc-empty-title { font-family: var(--font-display); font-weight: 700; font-size: 19px; color: var(--cream); }
+  .doc-empty-text { font-size: 14px; line-height: 1.65; color: var(--dim); max-width: 460px; }
+  .dept-team-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-6);
+    max-width: 880px; margin: 0 auto;
+  }
+  .dept-team-grid .person-photo { aspect-ratio: 1 / 1; }
+  .dept-team-grid .person-photo img { object-position: center 20%; }
+  .dept-team-grid .person-name { font-size: 17px; }
+  .dropdown a.is-current { color: var(--cream); background: rgba(155,47,135,0.12); }
+  @media (max-width: 860px) { .dept-team-grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 560px) {
+    .dept-team-grid { grid-template-columns: 1fr; max-width: 380px; }
     .doc-card { flex-wrap: wrap; }
     .doc-card-open { margin-left: 60px; }
   }
@@ -68,7 +96,6 @@
 </head>
 <body>
 
-<!-- ══ NAV ══ -->
 <header class="nav">
   <div class="nav-inner">
     <a class="nav-brand" href="index.html">
@@ -82,19 +109,21 @@
         <a class="nav-link active" href="team.html">Team <span class="caret">&#9662;</span></a>
         <div class="dropdown">
           <a href="team.html#meet-the-team">Meet the Team</a>
-          <a href="hr.html">HR Department</a>
+          <a href="hr.html">HR</a>
+          <a href="tech.html">Tech</a>
           <a href="content.html">Content</a>
-          <a href="tech.html">Tech Department</a>
           <a href="fundraising.html">Fundraising</a>
-          <a href="marketing.html" style="color:var(--cream)">Marketing</a>
-          <a href="design.html">Design</a>
+          <a href="marketing.html" class="is-current">Marketing</a>
+          <a href="ops.html">Ops</a>
+          <a href="executive-office.html">Executive Office</a>
         </div>
       </div>
       <div class="nav-item">
         <a class="nav-link" href="management.html">Management <span class="caret">&#9662;</span></a>
         <div class="dropdown">
-          <a href="management.html">MGT Team</a>
+          <a href="management.html#mgt-team">MGT Team</a>
           <a href="management.html#documents">Documents</a>
+          <a href="management.html#offsite">HOF Offsite</a>
         </div>
       </div>
     </nav>
@@ -103,22 +132,22 @@
     </div>
   </div>
   <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html">Home</a>
+    <a class="" href="index.html">Home</a>
     <div class="group-label">Team</div>
     <a class="sub" href="team.html#meet-the-team">Meet the Team</a>
-    <a class="sub" href="hr.html">HR Department</a>
+    <a class="sub" href="hr.html">HR</a>
+    <a class="sub" href="tech.html">Tech</a>
     <a class="sub" href="content.html">Content</a>
-    <a class="sub" href="tech.html">Tech Department</a>
     <a class="sub" href="fundraising.html">Fundraising</a>
-    <a class="sub" href="marketing.html">Marketing</a>
-    <a class="sub" href="design.html">Design</a>
+    <a class="sub active" href="marketing.html">Marketing</a>
+    <a class="sub" href="ops.html">Ops</a>
+    <a class="sub" href="executive-office.html">Executive Office</a>
     <div class="group-label">Management</div>
-    <a class="sub" href="management.html">MGT Team</a>
+    <a class="sub" href="management.html#mgt-team">MGT Team</a>
     <a class="sub" href="management.html#documents">Documents</a>
   </div>
 </header>
 
-<!-- ══ HERO ══ -->
 <section class="hero dept-hero">
   <img class="hero-mark" src="assets/logo/faithstream_icon_white.png" alt="" aria-hidden="true">
   <div class="hero-inner">
@@ -129,7 +158,6 @@
   </div>
 </section>
 
-<!-- ══ CONTENT ══ -->
 <section class="section">
   <div class="container">
     <a class="back-link" href="team.html#departments">&larr; Back to all departments</a>
@@ -146,52 +174,113 @@
     <div class="section-kicker">Resources</div>
     <h2 class="section-title">Department Documents</h2>
 
+    <div class="docs-toolbar">
+      <a class="drive-link" href="https://drive.google.com/drive/folders/10-go5zpoTV5qYKTZngBMwdDkj6RbHrTe" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2z"/></svg>
+        Open folder in Drive
+      </a>
+    </div>
+
     <div class="doc-cards">
-      <a class="doc-card" href="https://drive.google.com/open?id=1qLKfGulYtN1NmSGJASTyPhJO2zFASp62" target="_blank" rel="noopener">
+      <div class="doc-card" data-doc="mk-media-exposure-brief"
+           data-title="FaithStream — Media Exposure Brief"
+           data-sub="DOCX document &middot; Marketing department"
+           data-file="assets/docs/mk-media-exposure-brief.docx"
+           data-drive="https://drive.google.com/open?id=1qLKfGulYtN1NmSGJASTyPhJO2zFASp62">
         <div class="doc-card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 12h8v1.5H8V12zm0 3h8v1.5H8V15z"/></svg></div>
         <div class="doc-card-body">
           <div class="doc-card-title">FaithStream — Media Exposure Brief</div>
-          <div class="doc-card-meta">.docx &middot; Google Drive</div>
+          <div class="doc-card-desc">Media plan brief covering radio, bus branding, OOH and lamp-poles — a 2-month campaign targeting 500 app downloads a day.</div>
+          <div class="doc-card-meta">.docx &middot; Click to read</div>
         </div>
-        <span class="doc-card-open">Open in Drive &rarr;</span>
-      </a>
-      <a class="doc-card" href="https://drive.google.com/open?id=1jMjLsT3ZIGVP4L5DJ9hA87J-F70uFQqW" target="_blank" rel="noopener">
+        <span class="doc-card-open">Read &rarr;</span>
+      </div>
+      <div class="doc-card" data-doc="mk-equipment-procurement"
+           data-title="FaithStream In-House Content Production — Equipment Procurement Request"
+           data-sub="DOCX document &middot; Marketing department"
+           data-file="assets/docs/mk-equipment-procurement.docx"
+           data-drive="https://drive.google.com/open?id=1jMjLsT3ZIGVP4L5DJ9hA87J-F70uFQqW">
         <div class="doc-card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 12h8v1.5H8V12zm0 3h8v1.5H8V15z"/></svg></div>
         <div class="doc-card-body">
           <div class="doc-card-title">FaithStream In-House Content Production — Equipment Procurement Request</div>
-          <div class="doc-card-meta">.docx &middot; Google Drive</div>
+          <div class="doc-card-desc">Equipment list and budget breakdown for setting up FaithStream’s in-house content production studio.</div>
+          <div class="doc-card-meta">.docx &middot; Click to read</div>
         </div>
-        <span class="doc-card-open">Open in Drive &rarr;</span>
-      </a>
-      <a class="doc-card" href="https://drive.google.com/open?id=1FwYm7eSXxTnmOByCSjBAwVtNBqJwbLxb" target="_blank" rel="noopener">
+        <span class="doc-card-open">Read &rarr;</span>
+      </div>
+      <div class="doc-card" data-doc="mk-gtm-plan"
+           data-title="FaithStream Marketing Activity Plan [Nov 2025 – Feb 2026]"
+           data-sub="DOCX document &middot; Marketing department"
+           data-file="assets/docs/mk-gtm-plan.docx"
+           data-drive="https://drive.google.com/open?id=1FwYm7eSXxTnmOByCSjBAwVtNBqJwbLxb">
         <div class="doc-card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 12h8v1.5H8V12zm0 3h8v1.5H8V15z"/></svg></div>
         <div class="doc-card-body">
-          <div class="doc-card-title">FaithStream Go-To-Market Execution Plan [Dec – Jan 2025]</div>
-          <div class="doc-card-meta">.docx &middot; Google Drive</div>
+          <div class="doc-card-title">FaithStream Marketing Activity Plan [Nov 2025 – Feb 2026]</div>
+          <div class="doc-card-desc">Three-phase go-to-market plan: the Lagos launch event, the “Love & Porridge” premiere, product marketing and social editorial.</div>
+          <div class="doc-card-meta">.docx &middot; Click to read</div>
         </div>
-        <span class="doc-card-open">Open in Drive &rarr;</span>
-      </a>
-      <a class="doc-card" href="https://drive.google.com/open?id=1SOT-KvxNsYLDP9ogQTnfERBPY_7BJZ7K" target="_blank" rel="noopener">
+        <span class="doc-card-open">Read &rarr;</span>
+      </div>
+      <div class="doc-card" data-doc="mk-newsletter"
+           data-title="House of Faith / FaithStream Newsletter"
+           data-sub="DOCX document &middot; Marketing department"
+           data-file="assets/docs/mk-newsletter.docx"
+           data-drive="https://drive.google.com/open?id=1SOT-KvxNsYLDP9ogQTnfERBPY_7BJZ7K">
         <div class="doc-card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 12h8v1.5H8V12zm0 3h8v1.5H8V15z"/></svg></div>
         <div class="doc-card-body">
           <div class="doc-card-title">House of Faith / FaithStream Newsletter</div>
-          <div class="doc-card-meta">.docx &middot; Google Drive</div>
+          <div class="doc-card-desc">The House of Faith / FaithStream newsletter copy.</div>
+          <div class="doc-card-meta">.docx &middot; Click to read</div>
         </div>
-        <span class="doc-card-open">Open in Drive &rarr;</span>
-      </a>
-      <a class="doc-card" href="https://drive.google.com/open?id=1ZpMIFlrwai0D0ggUNSGTskllXCLo5Jdw" target="_blank" rel="noopener">
+        <span class="doc-card-open">Read &rarr;</span>
+      </div>
+      <div class="doc-card" data-doc="mk-data-sources"
+           data-title="Data Sources — HOF Nov26 Announcement"
+           data-sub="DOCX document &middot; Marketing department"
+           data-file="assets/docs/mk-data-sources.docx"
+           data-drive="https://drive.google.com/open?id=1ZpMIFlrwai0D0ggUNSGTskllXCLo5Jdw">
         <div class="doc-card-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 12h8v1.5H8V12zm0 3h8v1.5H8V15z"/></svg></div>
         <div class="doc-card-body">
           <div class="doc-card-title">Data Sources — HOF Nov26 Announcement</div>
-          <div class="doc-card-meta">.docx &middot; Google Drive</div>
+          <div class="doc-card-desc">Source citations backing every statistic used in the November 2026 announcement.</div>
+          <div class="doc-card-meta">.docx &middot; Click to read</div>
         </div>
-        <span class="doc-card-open">Open in Drive &rarr;</span>
-      </a>
+        <span class="doc-card-open">Read &rarr;</span>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ══ FOOTER ══ -->
+<section class="section">
+  <div class="container">
+    <div class="section-kicker">The People</div>
+    <h2 class="section-title">Department Team</h2>
+    <div class="dept-team-grid">
+      <article class="person-card">
+        <div class="person-photo"><img src="assets/img/christabel.jpg" alt="Oragui Christabel"></div>
+        <div class="person-info">
+          <h3 class="person-name">Oragui Christabel</h3>
+          <div class="person-role">Social Media Manager</div>
+        </div>
+      </article>
+      <article class="person-card">
+        <div class="person-photo"><img src="assets/img/james.jpg" alt="Echendu James"></div>
+        <div class="person-info">
+          <h3 class="person-name">Echendu James</h3>
+          <div class="person-role">Video Editor</div>
+        </div>
+      </article>
+      <article class="person-card">
+        <div class="person-photo"><img src="assets/img/nifemi.jpg" alt="Adeniran Oluwanifemi"></div>
+        <div class="person-info">
+          <h3 class="person-name">Adeniran Oluwanifemi</h3>
+          <div class="person-role">Graphics Designer</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <footer class="footer">
   <div class="footer-inner">
     <p class="footer-links">Want to learn more about House of Faith and FaithStream?<br>Visit <a href="https://ahouseoffaith.org" target="_blank" rel="noopener">ahouseoffaith.org</a> or <a href="https://thefaithstream.com" target="_blank" rel="noopener">thefaithstream.com</a></p>
@@ -212,13 +301,665 @@
   </div>
 </footer>
 
-<script>
-  const burger = document.getElementById('burger');
-  const menu = document.getElementById('mobileMenu');
-  burger.addEventListener('click', () => {
-    burger.classList.toggle('open');
-    menu.classList.toggle('open');
-  });
-</script>
+<!-- ══ DOCUMENT VIEWER ══ -->
+<div class="dv-overlay" id="docViewer" role="dialog" aria-modal="true" aria-label="Document viewer">
+  <div class="dv-modal">
+    <div class="dv-head">
+      <div class="dv-head-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11zM8 12h8v1.5H8V12zm0 3h8v1.5H8V15z"/></svg></div>
+      <div class="dv-head-body">
+        <div class="dv-title"></div>
+        <div class="dv-sub"></div>
+      </div>
+      <div class="dv-close" role="button" tabindex="0" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></div>
+    </div>
+    <div class="dv-body"></div>
+    <div class="dv-foot">
+      <a class="dv-btn primary" data-dv="drive" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2z"/></svg>Open in Drive</a>
+      <a class="dv-btn ghost" data-dv="download"><svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>Download</a>
+      <span class="dv-foot-note">Press Esc to close</span>
+    </div>
+  </div>
+</div>
+<template id="doc-mk-media-exposure-brief"><p><img src="assets/docs/media/mk-media-exposure-brief-1.png" style="width:1.40104in;height:1.40104in" /></p>
+<p><strong>FAITHSTREAM - MEDIA EXPOSURE BRIEF</strong></p>
+<blockquote>
+<p>Brand Description:</p>
+<p>FaithStream is Africa's first premium faith-based streaming platform, offering a curated library of films, series, documentaries, and audio content that celebrates Christian faith and African heritage. Designed as a mobile-first platform, FaithStream is available globally on iOS and Android, free to all users and wholly supported by donations and grants.</p>
+<p>We officially launched on the 27th of February and responses have been positive.</p>
+<p>However, it is important that we ride on current momentum to achieve the following objectives;</p>
+</blockquote>
+<ol type="1">
+<li><blockquote>
+<p>Drive awareness for the brand</p>
+</blockquote></li>
+<li><blockquote>
+<p>Increase followership on the TikTok profile</p>
+</blockquote></li>
+<li><blockquote>
+<p>Increase app downloads and signups</p>
+</blockquote></li>
+</ol>
+<blockquote>
+<p><strong>Target Audience:</strong></p>
+<p>18 - 30</p>
+<p>Male and Female</p>
+<p><strong>The brief</strong></p>
+<p>We want to amplify the brand’s communication materials on different traditional platforms which includes;</p>
+</blockquote>
+<ul>
+<li><blockquote>
+<p>Radio ( Radio spots, hypes and media tours)</p>
+</blockquote></li>
+<li><blockquote>
+<p>Bus Banding (preferably routes from Ojota - Obalende, UNILAG etc)</p>
+</blockquote></li>
+<li><blockquote>
+<p>OOH (Static and animated billboards).</p>
+</blockquote></li>
+<li><blockquote>
+<p>Lamp - Poles (Preferably around UNILAG, YABATECH etc) but we’ll appreciate your recommendations based on the target audience.</p>
+</blockquote></li>
+</ul>
+<p>We’d appreciate your media plan to optimize spend across these formats to achieve maximum impact.</p>
+<blockquote>
+<p><strong>Proposed Budget</strong></p>
+<p>Agency to recommend</p>
+<p><strong>Proposed Duration:</strong></p>
+<p>2 months</p>
+</blockquote>
+<p><strong>Other Notes</strong></p>
+<p><strong>Look of Success</strong></p>
+<p>At least 500 App downloads daily</p>
+<p>Website visits</p>
+<p><strong>Primary KPIs</strong></p>
+<p>Awareness and Downloads</p>
+<p><strong>Conversion Funnel:</strong></p>
+<p>Download the app or visit the platform, sign up, and enjoy the content. It is free and comes at no additional cost to you.</p>
+</template>
+<template id="doc-mk-equipment-procurement"><h1 id="faithstream-in-house-content-production-equipment-procurement-request"><strong>FAITHSTREAM IN-HOUSE CONTENT PRODUCTION EQUIPMENT PROCUREMENT REQUEST</strong></h1>
+<p><strong>Purpose<br />
+</strong></p>
+<p>This document outlines the required equipment for setting up an in-house content production system for FaithStream. The goal is to enable high-quality, consistent, and scalable content creation aligned with FaithStream’s premium brand positioning.</p>
+<p><strong>Equipment Budget Breakdown</strong></p>
+<table>
+<colgroup class="pd-cg">
+<col style="width: 6%" />
+<col style="width: 33%" />
+<col style="width: 41%" />
+<col style="width: 19%" />
+</colgroup>
+<thead><tr class="header">
+<th><strong>S/N</strong></th>
+<th><strong>ITEM</strong></th>
+<th><strong>DESCRIPTION</strong></th>
+<th><strong>PRICE (₦)</strong></th>
+</tr></thead><tbody><tr class="odd">
+<td>1</td>
+<td>LED 800 Pro</td>
+<td>High-intensity LED light for professional lighting setup</td>
+<td>45,000</td>
+</tr><tr class="header">
+<td>2</td>
+<td>Baiwangli Microphone</td>
+<td>Condenser microphone for clear, studio-quality audio recording</td>
+<td>40,000</td>
+</tr><tr class="odd">
+<td>3</td>
+<td>Multipurpose Tripod 6.5ft</td>
+<td>Adjustable tripod stand for stable and professional video capture</td>
+<td>33,000</td>
+</tr><tr class="header">
+<td>4</td>
+<td>U-800 RGB Light</td>
+<td>Multi-color RGB lighting for creative and dynamic scenes</td>
+<td>64,000</td>
+</tr></tbody>
+<tbody>
+</tbody>
+</table>
+<table>
+<colgroup class="pd-cg">
+<col style="width: 39%" />
+<col style="width: 60%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>TOTAL</strong></th>
+<th><strong>₦182,000</strong></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+</template>
+<template id="doc-mk-gtm-plan"><p><strong><u>FAITHSTREAM MARKETING ACTIVITY PLAN [NOVEMBER 2025 - FEB 2026]</u></strong></p>
+<p><strong>EXECUTIVE SUMMARY</strong></p>
+<p>FaithStream is launching as Africa's premier faith-based streaming platform, targeting 700M+ Christians across Sub-Saharan Africa and the diaspora. This three-phase GTM plan leverages House of Faith's ecosystem to build anticipation, drive adoption, and establish market dominance in the faith-based entertainment sector.<br />
+<br />
+Following the successful announcement of FaithStream and the availability of <a href="http://thefaithstream.com"><u>thefaithstream.com</u></a> on 26 Nov 2025, plans have now begun for the global launch event to be held in Lagos, Nigeria. The first FaithStream original will also premiere around this launch event.</p>
+<p>This plan highlights the 4 key jobs to be done: Lagos Launch Event, Movie Premiere, Product Marketing, and Social Editorial Management.</p>
+<p><strong>Key Success Metrics</strong></p>
+<table>
+<colgroup class="pd-cg">
+<col style="width: 33%" />
+<col style="width: 26%" />
+<col style="width: 40%" />
+</colgroup>
+<thead><tr class="header">
+<th><strong>Metric</strong></th>
+<th><strong>Target</strong></th>
+<th><strong>Timeline</strong></th>
+</tr></thead><tbody><tr class="odd">
+<td>Waitlist Sign-ups</td>
+<td>10,000</td>
+<td>Nov 30 - Jan 15</td>
+</tr><tr class="header">
+<td>Active Subscribers</td>
+<td>50,000+</td>
+<td>Feb 2026</td>
+</tr><tr class="odd">
+<td>Media Impressions</td>
+<td>10M+</td>
+<td>Mar 2026</td>
+</tr><tr class="header">
+<td>Media Coverage</td>
+<td>50+ outlets</td>
+<td>Mar 2026</td>
+</tr><tr class="odd">
+<td>Geographic Reach (comms)</td>
+<td>15 countries</td>
+<td>Jun 2026</td>
+</tr></tbody>
+<tbody>
+</tbody>
+</table>
+<p><strong>CORE OBJECTIVES</strong></p>
+<ol type="1">
+<li><blockquote>
+<p>User Growth: 10K waitlist by Dec 31 → 50K+ app users by Feb 2026</p>
+</blockquote></li>
+<li><blockquote>
+<p>Fundraising: Drive donations via HOF corporate + FaithStream channels (individual + corporate donors)</p>
+</blockquote></li>
+</ol>
+<h1 id="section"></h1>
+<h1 id="section-1"></h1>
+<h1 id="section-2"></h1>
+<h1 id="section-3"></h1>
+<h1 id="i-lagos-launch-event---january-16-2026"><strong>(I) LAGOS LAUNCH EVENT - <mark>January 16, 2026</mark></strong></h1>
+<table>
+<colgroup class="pd-cg">
+<col style="width: 22%" />
+<col style="width: 77%" />
+</colgroup>
+<thead><tr class="header">
+<th><h1 id="phase"><strong>Phase</strong></h1></th>
+<th><h1 id="key-activities"><strong>Key Activities</strong></h1></th>
+</tr></thead><tbody><tr class="odd">
+<td><h1 id="concept"><strong>Concept</strong></h1></td>
+<td><h1 id="the-gift-unwrapped---revealing-faithstream-to-africa."><mark>“The Gift Unwrapped”</mark> - revealing FaithStream to Africa. </h1>
+<h1 id="venue-eko-hotel-150-200-guests."><mark>Venue: Eko Hotel (150-200 guests).</mark> </h1>
+<h1 id="red-carpet-premiere-of-love-porridge.-live-product-demo.">Red carpet premiere of 'Love &amp; Porridge'. Live product demo.</h1></td>
+</tr><tr class="header">
+<td><h1 id="pre-event-dec-15---jan-15"><strong>Pre-Event (Dec 15 - Jan 15)</strong></h1></td>
+<td><h1 id="media-invites-to-nollywoodentertainment-press-tech-journalists-dec-20">Media invites to Nollywood/entertainment press, tech journalists (Dec 20)</h1>
+<h1 id="guest-invites-performer-producers-pastors-donors-influencers-early-supporters-dec-22">Guest invites: performer, producers, pastors, donors, influencers, early supporters (Dec 22)</h1>
+<h1 id="countdown-social-campaign-continuation-venue-teasers-jan-1-15">Countdown social campaign continuation + venue teasers (Jan 1-15)</h1>
+<h1 id="press-kit-distribution-with-embargoed-assets-jan-10">Press kit distribution with embargoed assets (Jan 10)</h1>
+<ul>
+<li><blockquote>
+<p>Co-founders’ media rounds</p>
+</blockquote></li>
+</ul></td>
+</tr><tr class="odd">
+<td><h1 id="event-day-jan-16"><strong>Event Day (Jan 16)</strong></h1></td>
+<td><h1 id="red-carpet-arrivals-media-wall-interviews">Red carpet arrivals + media wall interviews</h1>
+<h1 id="co-founders-keynote-faithstream-live-demo">Co-founders keynote + FaithStream live demo</h1>
+<h1 id="love-porridge-premiere-screening">'Love &amp; Porridge' premiere screening</h1>
+<h1 id="real-time-social-posting-live-stream-highlights">Real-time social posting + live stream highlights</h1>
+<h1 id="donor-recognition-partnership-announcements">Donor recognition + partnership announcements</h1></td>
+</tr><tr class="header">
+<td><h1 id="post-event-jan-17-31"><strong>Post-Event (Jan 17-31)</strong></h1></td>
+<td><h1 id="press-release-distribution-media-follow-ups">Press release distribution + media follow-ups</h1>
+<h1 id="event-highlights-reel-across-all-social-channels">Event highlights reel across all social channels</h1>
+<h1 id="thank-you-emails-to-attendees-with-app-download-cta">Thank you emails to attendees with app download CTA</h1>
+<h1 id="interview-clips-for-ongoing-pr-push">Interview clips for ongoing PR push</h1>
+<ul>
+<li><blockquote>
+<p>Co-founders’ media rounds</p>
+</blockquote></li>
+</ul></td>
+</tr></tbody>
+<tbody>
+</tbody>
+</table>
+<h1 id="section-4"></h1>
+<h1 id="ii-love-porridge---faithstreams-first-original"><strong>(II) 'LOVE &amp; PORRIDGE' - FaithStream’s First Original</strong> </h1>
+<ol type="1">
+<li><blockquote>
+<p>Teaser trailer release (Jan 2-8) - 30-sec clips across social + YouTube</p>
+</blockquote></li>
+<li><blockquote>
+<p>Cast &amp; creator spotlights (Jan 6-14) - behind-the-scenes content, interviews</p>
+</blockquote></li>
+<li><blockquote>
+<p>Full trailer release (Jan 10) - premiere announcement push</p>
+</blockquote></li>
+<li><blockquote>
+<p>Media screenings (Jan 13-15) - select critics + influencer previews for reviews</p>
+</blockquote></li>
+<li><blockquote>
+<p>Lagos premiere (Jan 16) - red carpet event, cast Q&amp;A</p>
+</blockquote></li>
+<li><blockquote>
+<p>Global availability (Jan 16) - exclusive on FaithStream app</p>
+</blockquote></li>
+<li><blockquote>
+<p>Post-launch buzz (Jan 17-31) - press release, news stories, user reactions, review roundups, cast interviews</p>
+</blockquote></li>
+<li><blockquote>
+<p>Digital ads (Jan 16-Mar 16) - IG, FB, TikTok, YouTube, Display ads, in-app ads (3rd party apps)</p>
+</blockquote></li>
+</ol>
+<h1 id="iii-product-marketing---waitlist-user-growth"><strong>(III) PRODUCT MARKETING - Waitlist &amp; User Growth</strong></h1>
+<table>
+<colgroup class="pd-cg">
+<col style="width: 12%" />
+<col style="width: 87%" />
+</colgroup>
+<thead><tr class="header">
+<th><h1 id="channel"><strong>Channel</strong></h1></th>
+<th><h1 id="activities"><strong>Activities</strong></h1></th>
+</tr></thead><tbody><tr class="odd">
+<td><h1 id="paid-ads"><strong>Paid Ads</strong></h1></td>
+<td><h1 id="meta-tiktok-ads-dec-1---jan-31.">Meta + TikTok ads (Dec 1 - Jan 31). </h1>
+<h1 id="googleapp-store-ads-post-launch.">Google/App Store ads post-launch. </h1>
+<h1 id="target-faith-african-diaspora-audiences.">Target: faith + African diaspora audiences. </h1>
+<h1 id="budget-5000-3m-impressions-20k-clicks-600-sign-ups-av.-cpa-8"><mark><strong>Budget</strong>: $5,000 (3M impressions, 20K clicks, 600+ sign ups, Av. CPA $8)</mark></h1></td>
+</tr><tr class="header">
+<td><h1 id="crmemail"><strong>CRM/Email</strong></h1></td>
+<td><h1 id="waitlist-nurture-sequence-weekly-email-newsletters">Waitlist nurture sequence (weekly email newsletters)</h1>
+<h1 id="launch-announcement-email-jan-16.">Launch announcement email (Jan 16). </h1>
+<h1 id="donor-appeals-dec-20-jan-5.">Donor appeals (Dec 20, Jan 5). </h1>
+<h1 id="early-user-onboarding-flow.">Early user onboarding flow.</h1></td>
+</tr><tr class="odd">
+<td><h1 id="surprise-delight"><strong>Surprise &amp; Delight</strong></h1></td>
+<td><h1 id="early-access-releases-for-the-first-1000-waitlist-dec-26---boxing-day-gift.">Early access releases for the first <mark>1000</mark> waitlist (Dec 26 - Boxing day gift). </h1>
+<h1 id="exclusive-content-drops-for-early-adopters.">Exclusive content drops for early adopters. </h1>
+<h1 id="referral-incentives-programme">Referral incentives programme</h1></td>
+</tr><tr class="header">
+<td><h1 id="fundraising"><strong>Fundraising</strong></h1></td>
+<td><h1 id="givesendgo-campaign-push.">GiveSendGo campaign push. </h1>
+<h1 id="corporate-donor-outreach.">Corporate donor outreach. </h1>
+<h1 id="in-app-donation-prompts.">In-app donation prompts. </h1>
+<h1 id="event-sponsorshippartnership-packages.">Event sponsorship/partnership packages.</h1></td>
+</tr></tbody>
+<tbody>
+</tbody>
+</table>
+<h1 id="section-5"></h1>
+<h1 id="iv-content-marketing-digital-channels-management"><strong>(IV) CONTENT MARKETING &amp; DIGITAL CHANNELS MANAGEMENT</strong></h1>
+<h2 id="festive-campaign-the-gift-dec-1-31"><strong>Festive Campaign: "The Gift" (Dec 1-31)</strong></h2>
+<p>Continue #TheMissingPiece → #TheGiftToCome narrative.</p>
+<p>Christmas-themed content celebrating FaithStream as “the gift for the family.”</p>
+<p>Countdown to Jan 16 launch. Daily devotional teasers.</p>
+<p>Key messages:</p>
+<p><em><mark>- Donors = “give someone a gift of the gospel in the form of entertainment by supporting FaithStream”</mark></em></p>
+<p><em><mark>- Consumers = “here’s our gift to you this festive season, to give you joy and uplift your soul’</mark></em></p>
+<h2 id="social-media-ig-fb-tiktok-x"><strong>Social Media (IG, FB, TikTok, X)</strong></h2>
+<ol type="1">
+<li><blockquote>
+<p>Organic: 1-2 original posts/day across platforms. User testimonials, content teasers, behind-the-scenes, launch countdown</p>
+</blockquote></li>
+<li><blockquote>
+<p>Paid: Boost high-performing posts. Retargeting waitlist visitors. Launch week blitz</p>
+</blockquote></li>
+<li><blockquote>
+<p>Community: Engage comments/DMs within 2 hours. Share user-generated content. Host IG Lives with creators/cast/co-founders/influencers/volunteers</p>
+</blockquote></li>
+</ol>
+<h2 id="thought-leadership"><strong>Thought Leadership</strong></h2>
+<p>Kunle &amp; Hakeem bylined articles - blog and LinkedIn (1 each per week): faith-based media crisis, African entertainment opportunity. Podcast interviews (target 5+ between Dec &amp; Jan e.g. Black Flame with Gaise Baba). Co-founder personal posts on launch milestones.</p>
+<h2 id="influencer-marketing"><strong>Influencer Marketing</strong></h2>
+<p>Christian creator partnerships (10-15 creators). Friendly reviews. Skit creation. Launch day coordinated posts. Premiere attendance. Ongoing ambassador relationships. Focus: faith-aligned, African diaspora, family content creators.</p>
+<p><strong>(V) KEY DATES &amp; MILESTONES</strong></p>
+<ul>
+<li><blockquote>
+<p>Dec 20: Guest/media invites sent</p>
+</blockquote></li>
+<li><blockquote>
+<p>Jan 2: Full trailer release</p>
+</blockquote></li>
+<li><blockquote>
+<p>Jan 10: Press kits distributed + media rounds</p>
+</blockquote></li>
+<li><blockquote>
+<p>Jan 16: LAGOS LAUNCH</p>
+</blockquote></li>
+<li><blockquote>
+<p>Jan 17-31: Post-launch media blitz + media rounds</p>
+</blockquote></li>
+</ul>
+</template>
+<template id="doc-mk-newsletter"><p><strong>House of Faith / FaithStream</strong></p>
+<p><strong>Weekly Newsletter</strong></p>
+<p><em>A repeatable email structure for weekly sends — built to balance growth, retention, and mission support.</em></p>
+<h1 id="why-this"><strong>1. Why This?</strong></h1>
+<p>This means every newsletter has the same reliable shape, so the team is never starting from a blank page. Readers also learn what to expect each week — a devotion to ground them, new content to watch, ideas to think about, and a way to give back. Each section below has one clear job. Together they serve all three goals at once: discovery and growth (Showing on FaithStream, Top Watch), retention and connection (Voice of Faith devotional), thought leadership and brand authority (Thought Leadership Publications), and mission support (Give to House of Faith).</p>
+<h1 id="recommended"><strong>2. Recommended</strong></h1>
+<ul>
+<li><blockquote>
+<p>Frequency: Weekly (same day/time each week builds a habit).</p>
+</blockquote></li>
+<li><blockquote>
+<p>Length: Keep total scroll to 5 sections max so it stays skimmable on mobile.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Subject line: Lead with the devotional theme or the most exciting new release — not a generic 'Weekly Newsletter'.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Personalization: Where Mailchimp segments allow, vary the 'Top Watch' and 'Showing on FaithStream' blocks by viewer interest (kids' content, music/worship, sermons, series).</p>
+</blockquote></li>
+</ul>
+<h1 id="the-five-recurring-sections"><strong>3. The Five Recurring Sections</strong></h1>
+<table>
+<colgroup class="pd-cg">
+<col style="width: 23%" />
+<col style="width: 76%" />
+</colgroup>
+<thead><tr class="header">
+<th colspan="2"><strong>1. Voice of Faith — Weekly Devotional</strong></th>
+</tr></thead><tbody><tr class="odd">
+<td><strong>Purpose</strong></td>
+<td>Open the email with spiritual value first, before any promotional content. Builds trust, sets tone, and gives non-subscribers a reason to open every single week regardless of what's new on the platform.</td>
+</tr><tr class="header">
+<td><strong>Content source</strong></td>
+<td>Written fresh each week by a ministry/content team member, or adapted from a devotional already published on FaithStream (cross-promote the full version).</td>
+</tr><tr class="odd">
+<td><strong>Owner</strong></td>
+<td>Pastor Kunle, reviewed by the executive team before sending.</td>
+</tr><tr class="header">
+<td><strong>Frequency</strong></td>
+<td>Every send — always the first section.</td>
+</tr><tr class="odd">
+<td><strong>Format</strong></td>
+<td>Short scripture verse + 2–4 sentence reflection + one closing thought or prayer line. Keep under 300 words.</td>
+</tr></tbody>
+<tbody>
+</tbody>
+</table>
+<table>
+<colgroup class="pd-cg">
+<col style="width: 23%" />
+<col style="width: 76%" />
+</colgroup>
+<thead><tr class="header">
+<th colspan="2"><strong>2. Showing on FaithStream</strong></th>
+</tr></thead><tbody><tr class="odd">
+<td><strong>Purpose</strong></td>
+<td>Drives platform visits by spotlighting what's newly added — new movies, series episodes, sermons, podcasts, or PrayerStream sessions. This is the core product-discovery section.</td>
+</tr><tr class="header">
+<td><strong>Content source</strong></td>
+<td>Content and marketing teams pull whatever launched in the last 7 days.</td>
+</tr><tr class="odd">
+<td><strong>Owner</strong></td>
+<td>Marketing, fed by the Content team's weekly release list.</td>
+</tr><tr class="header">
+<td><strong>Frequency</strong></td>
+<td>Every send. Feature 2–3 titles max with thumbnail image + 2-line description each.</td>
+</tr><tr class="odd">
+<td><strong>Format</strong></td>
+<td>Image + title + 1-sentence hook + direct 'Watch Now' link per title.</td>
+</tr><tr class="header">
+<td><strong>Sample CTA</strong></td>
+<td>"Watch Now on FaithStream →"</td>
+</tr></tbody>
+<tbody>
+</tbody>
+</table>
+<table>
+<colgroup class="pd-cg">
+<col style="width: 23%" />
+<col style="width: 76%" />
+</colgroup>
+<thead><tr class="header">
+<th colspan="2"><strong>3. Thought Leadership Publications</strong></th>
+</tr></thead><tbody><tr class="odd">
+<td><strong>Purpose</strong></td>
+<td>Positions House of Faith as more than an entertainment app — a voice in faith, culture, and African Christian media. Good for credibility with partners, donors, and churches, and for SEO/shareability.</td>
+</tr><tr class="header">
+<td><strong>Content source</strong></td>
+<td>Founders, blog posts, articles, or talks from Kunle Falodun or Hakeem Condotti, or guest contributors on topics like faith and media, African Christianity, or storytelling.</td>
+</tr><tr class="odd">
+<td><strong>Owner</strong></td>
+<td>Marketing, in collaboration with the leadership team.</td>
+</tr><tr class="header">
+<td><strong>Frequency</strong></td>
+<td>Every send, or alternate weeks if the content pipeline is limited (clearly marked as recurring even if biweekly).</td>
+</tr><tr class="odd">
+<td><strong>Format</strong></td>
+<td>Headline + 2-sentence summary + 'Read More' link (to website blog page).</td>
+</tr><tr class="header">
+<td><strong>Sample CTA</strong></td>
+<td>"Read the Full Article →"</td>
+</tr></tbody>
+<tbody>
+</tbody>
+</table>
+<table>
+<colgroup class="pd-cg">
+<col style="width: 23%" />
+<col style="width: 76%" />
+</colgroup>
+<thead><tr class="header">
+<th colspan="2"><strong>4. Top Watch on FaithStream This Week</strong></th>
+</tr></thead><tbody><tr class="odd">
+<td><strong>Purpose</strong></td>
+<td>Social proof and momentum — shows the platform is active and popular, nudging undecided readers ('if others are watching, I should too'). Different job from 'Showing On' — this is about popularity, not novelty.</td>
+</tr><tr class="header">
+<td><strong>Content source</strong></td>
+<td>Platform analytics/dashboard — top 1–3 most-viewed titles in the trailing 7 days.</td>
+</tr><tr class="odd">
+<td><strong>Owner</strong></td>
+<td>Marketing, pulling weekly view data from Product/Analytics.</td>
+</tr><tr class="header">
+<td><strong>Frequency</strong></td>
+<td>Every send.</td>
+</tr><tr class="odd">
+<td><strong>Format</strong></td>
+<td>Simple ranked list or 3-thumbnail row with view-driven framing (e.g. "This week's most-watched").</td>
+</tr><tr class="header">
+<td><strong>Sample CTA</strong></td>
+<td>"See What Everyone's Watching →"</td>
+</tr></tbody>
+<tbody>
+</tbody>
+</table>
+<table>
+<colgroup class="pd-cg">
+<col style="width: 23%" />
+<col style="width: 76%" />
+</colgroup>
+<thead><tr class="header">
+<th colspan="2"><strong>5. Give to House of Faith</strong></th>
+</tr></thead><tbody><tr class="odd">
+<td><strong>Purpose</strong></td>
+<td>Connects the platform back to the mission — funding African faith-based storytelling. Keeps the task present but light so it doesn't feel like a constant pitch; can rotate with a 'partner spotlight' or 'volunteer/creator' CTA some weeks.</td>
+</tr><tr class="header">
+<td><strong>Content source</strong></td>
+<td>House of Faith donation page and mission messaging (650M+ Christians across Africa stat, etc.).</td>
+</tr><tr class="odd">
+<td><strong>Owner</strong></td>
+<td>Marketing, with messaging approved by House of Faith leadership/fundraising lead.</td>
+</tr><tr class="header">
+<td><strong>Frequency</strong></td>
+<td>Every send — always last section, short and low-pressure.</td>
+</tr><tr class="odd">
+<td><strong>Format</strong></td>
+<td>1–2 sentence mission reminder + single button CTA. No guilt-driven language; frame as joining a movement.</td>
+</tr><tr class="header">
+<td><strong>Sample CTA</strong></td>
+<td>"Support the Mission →" / "Give Today →"</td>
+</tr></tbody>
+<tbody>
+</tbody>
+</table>
+<h1 id="optional-rotating-add-ons"><strong>4. Optional / Rotating Add-ons</strong></h1>
+<p>These aren't in every send, but can slot into the skeleton occasionally to keep things fresh:</p>
+<ul>
+<li><blockquote>
+<p>Creator/Partner Spotlight — interview snippet or feature on a filmmaker, pastor, or content partner.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Community Voices — a viewer testimonial or short user-submitted reflection.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Behind the Scenes — production updates from House of Faith's studios.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Seasonal hooks — Easter, Christmas, or African church calendar moments, replacing the devotional with a themed version.</p>
+</blockquote></li>
+</ul>
+<h1 id="suggested-email-flow-top-to-bottom"><strong>5. Suggested Email Flow (Top to Bottom)</strong></h1>
+<ul>
+<li><blockquote>
+<p>Subject line + preview text (devotional theme or biggest new release)</p>
+</blockquote></li>
+<li><blockquote>
+<p>1. Voice of Faith — Weekly Devotional</p>
+</blockquote></li>
+<li><blockquote>
+<p>2. Showing on FaithStream (2–3 new titles)</p>
+</blockquote></li>
+<li><blockquote>
+<p>3. Top Watch on FaithStream This Week</p>
+</blockquote></li>
+<li><blockquote>
+<p>4. Thought Leadership Publications</p>
+</blockquote></li>
+<li><blockquote>
+<p>5. Give to House of Faith</p>
+</blockquote></li>
+<li><blockquote>
+<p>Footer: social links, app download badges, unsubscribe/preferences</p>
+</blockquote></li>
+</ul>
+<h1 id="next-steps"><strong>6. Next Steps</strong></h1>
+<ul>
+<li><blockquote>
+<p>Create a monthly schedule calendar</p>
+</blockquote></li>
+<li><blockquote>
+<p>Assign owners for each section's weekly content feed (devotional writer, product/release list, analytics pull, leadership quote).</p>
+</blockquote></li>
+<li><blockquote>
+<p>Build a Mailchimp template matching this skeleton so each week is drag-and-drop, not built from scratch.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Set up basic tracking (open rate, click rate by section/link) to see which blocks actually drive FaithStream visits vs. donations.</p>
+</blockquote></li>
+</ul>
+</template>
+<template id="doc-mk-data-sources"><h3 id="less-than-500000-hours-of-localised-faith-based-content-available-compared-to-over-2-billion-hours-of-secular-global-streaming-content"><strong>1.) Less than 500,000 hours of localised faith-based content available compared to over 2 billion hours of secular global streaming content</strong></h3>
+<ul>
+<li><blockquote>
+<p>Data Source Support: This claim is about the disparity in scale. While a direct comparison is hard to find, the sources below establish the massive size of the secular streaming market and the relatively niche size of the faith-based one.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Web Links:</p>
+</blockquote>
+<ul>
+<li><blockquote>
+<p>Secular Content (Netflix Scale): The BBC, citing Netflix's own data, reported on the sheer volume of content. While not giving a total hour count, it contextualizes the scale.</p>
+</blockquote>
+<ul>
+<li><blockquote>
+<p>Link: <a href="https://www.bbc.com/news/entertainment-arts-68345554">BBC News - Netflix: How much of the video streaming giant's content is available in the UK?</a></p>
+</blockquote></li>
+</ul></li>
+<li><blockquote>
+<p>Faith-Based Content (Pure Flix Scale): A review of the faith-based streaming service Pure Flix on The Streamable gives a sense of its library size, which is orders of magnitude smaller than Netflix's.</p>
+</blockquote>
+<ul>
+<li><blockquote>
+<p>Link: <a href="https://thestreamable.com/news/what-is-pure-flix-faith-based-streaming-service-plans-and-price">The Streamable - What is Pure Flix?</a></p>
+</blockquote></li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="of-african-christians-prefer-consuming-content-in-native-languages"><strong>2.) 90% of African Christians prefer consuming content in native languages</strong></h3>
+<ul>
+<li><blockquote>
+<p>Data Source Support: This statistic is widely cited in reports focused on the African media and religious landscape. The link below is to a news article summarizing the key findings of the Barna Group study.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Web Link:</p>
+</blockquote>
+<ul>
+<li><blockquote>
+<p>Link: <a href="https://www.christiandaily.com/article/majority-of-african-christians-prefer-content-in-their-native-language-study-finds/127582.htm">Christian Daily - Majority of African Christians prefer content in their native language, study finds</a> (This article references the Barna Group study).</p>
+</blockquote></li>
+</ul></li>
+</ul>
+<h3 id="of-african-content-consumers-prefer-culturally-relevant-stories"><strong>3.) 82% of African content consumers prefer culturally relevant stories</strong></h3>
+<ul>
+<li><blockquote>
+<p>Data Source Support: This figure aligns with regional media consumption reports. The linked article from GeoPoll, a leading mobile surveying platform in Africa, provides strong data supporting this overwhelming preference for local content.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Web Link:</p>
+</blockquote>
+<ul>
+<li><blockquote>
+<p>Link: <a href="https://www.geopoll.com/blog/content-preferences-africa-demand-local-tv-radio/">GeoPoll - Content Preferences in Africa: Demand for Local TV and Radio</a></p>
+</blockquote></li>
+</ul></li>
+</ul>
+<h3 id="fewer-than-50-african-titles-featured-as-of-2024-in-the-leading-global-christian-streaming-platforms"><strong>4.) Fewer than 50 African titles featured as of 2024 in the leading global christian streaming platforms</strong></h3>
+<ul>
+<li><blockquote>
+<p>Data Source Support: This can be verified by examining the public catalogs of the platforms themselves. The link is to the "International" or "African" category on Pure Flix, one of the largest global Christian platforms. A manual count of titles originating from African countries confirms the number is very low.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Web Link:</p>
+</blockquote>
+<ul>
+<li><blockquote>
+<p>Link: <a href="https://www.pureflixtitles.com/browse/african-movies">Pure Flix - African Movies</a> (This is a third-party site that tracks Pure Flix's catalog, showing a limited number of African titles).</p>
+</blockquote></li>
+</ul></li>
+</ul>
+<h3 id="the-global-faith-based-media-industry-valued-at-47-billion"><strong>5.) The global faith-based media industry valued at $47 billion</strong></h3>
+<ul>
+<li><blockquote>
+<p>Data Source Support: This valuation is consistently reported by major market research firms. The link below is to the Mordor Intelligence report summary, which cites a nearly identical figure.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Web Link:</p>
+</blockquote>
+<ul>
+<li><blockquote>
+<p>Link: <a href="https://www.mordorintelligence.com/industry-reports/faith-based-media-market">Mordor Intelligence - Faith-Based Media Market - Size &amp; Share Analysis</a> (The summary page states: "The Faith-Based Media Market size is estimated at USD 48.62 billion in 2024...")</p>
+</blockquote></li>
+</ul></li>
+</ul>
+<h3 id="christian-streaming-projected-to-reach-4-billion-by-2028-growing-at-a-10-compound-annual-growth-rate."><strong>6.) Christian streaming projected to reach $4 billion by 2028, growing at a 10% compound annual growth rate.</strong></h3>
+<ul>
+<li><blockquote>
+<p>Data Source Support: This projection is also from a detailed market research report. The link to the Mordor Intelligence summary for the faith-based <em>streaming</em> market shows the specific growth rate and market trajectory.</p>
+</blockquote></li>
+<li><blockquote>
+<p>Web Link:</p>
+</blockquote>
+<ul>
+<li><blockquote>
+<p>Link: <a href="https://www.mordorintelligence.com/industry-reports/faith-based-streaming-media-market">Mordor Intelligence - Faith-Based Streaming Media Market - Growth &amp; Trends</a> (The summary states: "The Faith-based Streaming Media Market size is estimated at USD 2.66 billion in 2024, and is expected to reach USD 4.29 billion by 2029, growing at a CAGR of 10.02% during the forecast period (2024-2029).")</p>
+</blockquote></li>
+</ul></li>
+</ul>
+<p>Important Note: Market research firms like Mordor Intelligence and Grand View Research typically provide free summary pages with key statistics, but the full detailed reports require a purchase. The summaries linked above are considered credible sources for the data points they highlight.</p>
+</template>
+
+<script src="assets/viewer.js"></script>
 </body>
 </html>
