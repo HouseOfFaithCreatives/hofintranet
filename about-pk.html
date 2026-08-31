@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PK&#x27;s Chronicles — House of Faith Intranet</title>
+<link rel="icon" type="image/png" href="assets/logo/faithstream_favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .mgt-hero .hero-inner { padding: 76px var(--sp-6) 84px; }
+  .back-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 600; color: var(--dim);
+    margin-bottom: var(--sp-8); transition: color 0.16s;
+  }
+  .back-link:hover { color: var(--cream); }
+
+  /* ── Profile ── */
+  .profile {
+    max-width: 940px; margin: 0 auto;
+    display: grid; grid-template-columns: 0.85fr 1.15fr;
+    gap: var(--sp-10); align-items: start;
+  }
+  .profile-photo {
+    border-radius: var(--radius-xl); overflow: hidden;
+    border: 1px solid var(--border); position: relative;
+    aspect-ratio: 4 / 5;
+  }
+  .profile-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+  .profile-name {
+    font-family: var(--font-display); font-weight: 800;
+    font-size: clamp(28px, 4vw, 42px); letter-spacing: -0.02em; line-height: 1.1;
+    color: #fff; margin-bottom: var(--sp-3);
+  }
+  .profile-title {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--magenta); margin-bottom: var(--sp-6);
+  }
+  .profile-bio p {
+    font-size: 15.5px; line-height: 1.75; color: rgba(240,238,248,0.82);
+    margin-bottom: var(--sp-4);
+  }
+  .profile-bio strong { color: #fff; font-weight: 600; }
+  .profile-socials { display: flex; gap: var(--sp-3); margin-top: var(--sp-6); }
+
+  /* ── Video cards ── */
+  .videos-grid-3 {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-6);
+    max-width: 1000px; margin: 0 auto;
+  }
+  .video-card { background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s; }
+  .video-card:hover { transform: translateY(-3px); border-color: rgba(155,47,135,0.45); }
+  .video-thumb { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--surface2); }
+  .video-thumb iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .thumb-brand {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    background: radial-gradient(420px 240px at 70% 20%, rgba(155,47,135,0.3), transparent 65%),
+                linear-gradient(140deg, #1E1126, var(--plum));
+  }
+  .thumb-brand img { height: 54px; width: auto; opacity: 0.75; }
+  .play-btn {
+    position: absolute; inset: 0; margin: auto; width: 54px; height: 54px;
+    border-radius: 50%; background: rgba(155,47,135,0.92);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.5); transition: transform 0.18s, background 0.18s;
+  }
+  .video-card:hover .play-btn { transform: scale(1.1); background: var(--magenta); }
+  .play-btn svg { width: 19px; height: 19px; fill: #fff; margin-left: 3px; }
+  .video-info { padding: var(--sp-4) var(--sp-5) var(--sp-5); }
+  .video-title { font-size: 14.5px; font-weight: 700; color: var(--cream); line-height: 1.45; }
+  .video-channel { margin-top: 6px; font-size: 12.5px; color: var(--dim); }
+
+  /* ── Big nav buttons (Introducing FaithStream) ── */
+  .big-links { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--sp-4); }
+  .big-link {
+    display: flex; align-items: center; justify-content: space-between; gap: var(--sp-4);
+    padding: 26px var(--sp-8); border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, #221230, var(--plum));
+    border: 1px solid rgba(155,47,135,0.25);
+    transition: transform 0.18s, border-color 0.18s;
+  }
+  .big-link:hover { transform: translateY(-2px); border-color: rgba(155,47,135,0.6); }
+  .big-link-title { font-family: var(--font-display); font-weight: 700; font-size: clamp(19px, 2.6vw, 24px); color: #fff; }
+  .big-link-sub { font-size: 13px; color: rgba(240,238,248,0.6); margin-top: 4px; }
+  .big-link .arrow { font-size: 22px; color: var(--magenta); flex-shrink: 0; transition: transform 0.18s; }
+  .big-link:hover .arrow { transform: translateX(4px); }
+
+  /* ── Coming soon ── */
+  .coming-soon {
+    max-width: 780px; margin: 0 auto;
+    border: 1px dashed rgba(155,47,135,0.4); border-radius: var(--radius-xl);
+    padding: var(--sp-20) var(--sp-8); text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: var(--sp-3);
+  }
+  .coming-soon img { height: 52px; width: auto; opacity: 0.45; margin-bottom: var(--sp-2); }
+  .coming-soon-title { font-family: var(--font-display); font-weight: 700; font-size: 22px; color: var(--cream); }
+  .coming-soon-text { font-size: 14.5px; line-height: 1.7; color: var(--dim); max-width: 480px; }
+  .coming-soon-badge {
+    margin-top: var(--sp-4);
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--magenta); background: rgba(155,47,135,0.14);
+    border: 1px solid rgba(155,47,135,0.35); padding: 6px 14px; border-radius: 6px;
+  }
+
+  @media (max-width: 820px) {
+    .profile { grid-template-columns: 1fr; gap: var(--sp-8); max-width: 520px; }
+    .videos-grid-3 { grid-template-columns: 1fr; max-width: 560px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="index.html">
+      <img src="assets/logo/faithstream_icon_white.png" alt="House of Faith">
+      <span class="nav-brand-name">House of Faith</span>
+      <span class="nav-brand-tag">Intranet</span>
+    </a>
+    <nav class="nav-links">
+      <a class="nav-link" href="index.html">Home</a>
+      <div class="nav-item">
+        <a class="nav-link" href="team.html">Team <span class="caret">&#9662;</span></a>
+        <div class="dropdown">
+          <a href="team.html#meet-the-team">Meet the Team</a>
+          <a href="hr.html">HR</a>
+          <a href="tech.html">Tech</a>
+          <a href="content.html">Content</a>
+          <a href="fundraising.html">Fundraising</a>
+          <a href="marketing.html">Marketing</a>
+          <a href="ops.html">Ops</a>
+          <a href="executive-office.html">Executive Office</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a class="nav-link active" href="management.html">Management <span class="caret">&#9662;</span></a>
+        <div class="dropdown">
+          <a href="management.html">Management Team</a>
+          <a href="about-pk.html">About PK</a>
+          <a href="about-hc.html">About HC</a>
+          <a href="introducing-faithstream.html">Introducing FaithStream</a>
+          <a href="training.html">Training</a>
+        </div>
+      </div>
+    </nav>
+    <div class="nav-burger" id="burger" role="button" aria-label="Menu" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a class="" href="index.html">Home</a>
+    <div class="group-label">Team</div>
+    <a class="sub" href="team.html#meet-the-team">Meet the Team</a>
+    <a class="sub" href="hr.html">HR</a>
+    <a class="sub" href="tech.html">Tech</a>
+    <a class="sub" href="content.html">Content</a>
+    <a class="sub" href="fundraising.html">Fundraising</a>
+    <a class="sub" href="marketing.html">Marketing</a>
+    <a class="sub" href="ops.html">Ops</a>
+    <a class="sub" href="executive-office.html">Executive Office</a>
+    <div class="group-label">Management</div>
+    <a class="sub" href="management.html">Management Team</a>
+    <a class="sub" href="about-pk.html">About PK</a>
+    <a class="sub" href="about-hc.html">About HC</a>
+    <a class="sub" href="introducing-faithstream.html">Introducing FaithStream</a>
+    <a class="sub" href="training.html">Training</a>
+  </div>
+</header>
+<section class="hero mgt-hero">
+  <img class="hero-mark" src="assets/logo/faithstream_icon_white.png" alt="" aria-hidden="true">
+  <div class="hero-inner">
+    <div class="hero-kicker">Management &middot; Profile</div>
+    <div class="hero-frame">
+      <h1 class="hero-title">PK&rsquo;s Chronicles</h1>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <a class="back-link" href="management.html">&larr; Back to Management</a>
+    <div class="profile">
+      <div class="profile-photo"><img src="assets/img/kunle.jpg" alt="Pastor Kunle Falodun"></div>
+      <div>
+        <h2 class="profile-name">Pastor Kunle Falodun</h2>
+        <div class="profile-title">Co-Founder &amp; CEO, House of Faith</div>
+        <div class="profile-bio">
+          <p><strong>Pastor Kunle Falodun</strong> is a media executive, entrepreneur, minister, husband and father with over 20 years of experience in the media and entertainment industry. He has spent much of his career working across Africa, leading teams and businesses in content, sports, broadcasting and entertainment.</p>
+          <p>His love for God, people and media has shaped much of his journey. After years of working in the industry, he co-founded House of Faith with <strong>Hakeem Condotti</strong> to build something that brings these passions together. Today, he leads House of Faith with a focus on using media and storytelling to share the Christian faith and create content that people can connect with.</p>
+        </div>
+        <div class="profile-socials">
+          <a class="social-btn" href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45z"/></svg></a>
+          <a class="social-btn" href="https://www.youtube.com" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-kicker">Watch</div>
+    <h2 class="section-title">Pastor Kunle Falodun&rsquo;s Golden Jubilee Celebration<br>&mdash; 4th May, 2026</h2>
+    <div class="videos-grid-3">
+      <a class="video-card" href="https://www.youtube.com/results?search_query=PK@50+—+Interview+Part+1" target="_blank" rel="noopener">
+        <div class="video-thumb"><div class="thumb-brand"><img src="assets/logo/faithstream_icon_white.png" alt=""></div><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-info">
+          <div class="video-title">PK@50 — Interview Part 1</div>
+          <div class="video-channel">Kunle Falodun</div>
+        </div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/results?search_query=PK@50+—+Interview+Part+2" target="_blank" rel="noopener">
+        <div class="video-thumb"><div class="thumb-brand"><img src="assets/logo/faithstream_icon_white.png" alt=""></div><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-info">
+          <div class="video-title">PK@50 — Interview Part 2</div>
+          <div class="video-channel">Kunle Falodun</div>
+        </div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/results?search_query=Upgrade+Your+Mindset+—+Pst+Kunle+Falodun" target="_blank" rel="noopener">
+        <div class="video-thumb"><div class="thumb-brand"><img src="assets/logo/faithstream_icon_white.png" alt=""></div><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-info">
+          <div class="video-title">Upgrade Your Mindset — Pst Kunle Falodun</div>
+          <div class="video-channel">Kunle Falodun</div>
+        </div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/results?search_query=B+E+S+T+Services,+28th+June+2026" target="_blank" rel="noopener">
+        <div class="video-thumb"><div class="thumb-brand"><img src="assets/logo/faithstream_icon_white.png" alt=""></div><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-info">
+          <div class="video-title">B E S T Services, 28th June 2026</div>
+          <div class="video-channel">Gateway Chapel</div>
+        </div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/results?search_query=Online+Service+|+Abba+Father+|+Kunle+Falodun" target="_blank" rel="noopener">
+        <div class="video-thumb"><div class="thumb-brand"><img src="assets/logo/faithstream_icon_white.png" alt=""></div><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-info">
+          <div class="video-title">Online Service | Abba Father | Kunle Falodun</div>
+          <div class="video-channel">GodCity WLBC</div>
+        </div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/results?search_query=Conversations+with+Pastor+RO!+—+Special+Edition" target="_blank" rel="noopener">
+        <div class="video-thumb"><div class="thumb-brand"><img src="assets/logo/faithstream_icon_white.png" alt=""></div><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-info">
+          <div class="video-title">Conversations with Pastor RO! — Special Edition</div>
+          <div class="video-channel">GodCity WLBC</div>
+        </div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/results?search_query=Online+Sunday+Service+|+Andrew+Adeleke+|+House+of+Praise" target="_blank" rel="noopener">
+        <div class="video-thumb"><div class="thumb-brand"><img src="assets/logo/faithstream_icon_white.png" alt=""></div><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-info">
+          <div class="video-title">Online Sunday Service | Andrew Adeleke | House of Praise</div>
+          <div class="video-channel">House of Praise, London</div>
+        </div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/results?search_query=Strong+Tower+Resource+Center+|+Sunday+Service" target="_blank" rel="noopener">
+        <div class="video-thumb"><div class="thumb-brand"><img src="assets/logo/faithstream_icon_white.png" alt=""></div><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-info">
+          <div class="video-title">Strong Tower Resource Center | Sunday Service</div>
+          <div class="video-channel">RCCG Strong Tower Resource Center NJ</div>
+        </div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/results?search_query=Strong+Tower+Resource+Center+|+Sunday+Service" target="_blank" rel="noopener">
+        <div class="video-thumb"><div class="thumb-brand"><img src="assets/logo/faithstream_icon_white.png" alt=""></div><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-info">
+          <div class="video-title">Strong Tower Resource Center | Sunday Service</div>
+          <div class="video-channel">RCCG Strong Tower Resource Center NJ</div>
+        </div>
+      </a>
+      <a class="video-card" href="https://www.youtube.com/results?search_query=Day+8+|+Winter+Prayer+Conference+|+House+of+Praise+|+08.12.2023" target="_blank" rel="noopener">
+        <div class="video-thumb"><div class="thumb-brand"><img src="assets/logo/faithstream_icon_white.png" alt=""></div><div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="video-info">
+          <div class="video-title">Day 8 | Winter Prayer Conference | House of Praise | 08.12.2023</div>
+          <div class="video-channel">House of Praise, London</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <p class="footer-links">Want to learn more about House of Faith and FaithStream?<br>Visit <a href="https://ahouseoffaith.org" target="_blank" rel="noopener">ahouseoffaith.org</a> or <a href="https://thefaithstream.com" target="_blank" rel="noopener">thefaithstream.com</a></p>
+    <div class="socials">
+      <a class="social-btn" href="https://www.linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.55V9h3.57v11.45z"/></svg></a>
+      <a class="social-btn" href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85C2.38 3.92 3.9 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.27 2.7.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98 1.28.06 1.69.07 4.95.07s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95C23.73 2.7 21.31.27 16.95.07 15.67.01 15.26 0 12 0zm0 5.84A6.16 6.16 0 1 0 12 18.16 6.16 6.16 0 0 0 12 5.84zm0 10.15a4 4 0 1 1 0-7.99 4 4 0 0 1 0 7.99zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg></a>
+      <a class="social-btn" href="https://www.tiktok.com" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></a>
+      <a class="social-btn" href="https://x.com" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24"><path d="M18.24 2.25h3.31l-7.23 8.26L22.83 21.75h-6.66l-5.22-6.82-5.97 6.82H1.67l7.73-8.84L1.25 2.25h6.83l4.72 6.24 5.44-6.24zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64z"/></svg></a>
+      <a class="social-btn" href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.09 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.55-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.49h-2.8V24C19.61 23.09 24 18.1 24 12.07z"/></svg></a>
+      <a class="social-btn" href="https://www.youtube.com/@thefaithstream" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg></a>
+    </div>
+  </div>
+  <div class="footer-bar">
+    <div class="footer-bar-inner">
+      <span class="footer-copy">House of Faith &copy; 2026</span>
+      <span class="footer-mark"><img src="assets/logo/faithstream_icon_white.png" alt="">Powered by FaithStream</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/viewer.js"></script>
+</body>
+</html>
