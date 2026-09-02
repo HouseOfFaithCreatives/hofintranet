@@ -9,6 +9,18 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
+<style>
+  .founders-grid .person-photo { display: block; }
+  .person-link {
+    color: inherit; position: relative;
+    background-image: linear-gradient(var(--magenta), var(--magenta));
+    background-size: 0% 1.5px; background-position: 0 100%; background-repeat: no-repeat;
+    transition: background-size 0.24s ease, color 0.18s;
+    padding-bottom: 2px;
+  }
+  .person-card:hover .person-link { background-size: 100% 1.5px; color: #fff; }
+  .person-link:focus-visible { outline: 2px solid var(--magenta); outline-offset: 3px; border-radius: 3px; }
+</style>
 </head>
 <body>
 
@@ -89,16 +101,16 @@
     <h2 class="section-title">Our Founders</h2>
     <div class="founders-grid">
       <article class="person-card">
-        <div class="person-photo"><img src="assets/img/kunle.jpg" alt="Pastor Kunle Falodun"></div>
+        <a class="person-photo" href="about-pk.html"><img src="assets/img/kunle.jpg" alt="Pastor Kunle Falodun"></a>
         <div class="person-info">
-          <h3 class="person-name">Pastor Kunle Falodun</h3>
+          <h3 class="person-name"><a class="person-link" href="about-pk.html">Pastor Kunle Falodun</a></h3>
           <div class="person-role">CEO / Co-Founder</div>
         </div>
       </article>
       <article class="person-card">
-        <div class="person-photo"><img src="assets/img/hakeem.jpg" alt="Mr. Hakeem Condotti"></div>
+        <a class="person-photo" href="about-hc.html"><img src="assets/img/hakeem.jpg" alt="Mr. Hakeem Condotti"></a>
         <div class="person-info">
-          <h3 class="person-name">Mr. Hakeem Condotti</h3>
+          <h3 class="person-name"><a class="person-link" href="about-hc.html">Mr. Hakeem Condotti</a></h3>
           <div class="person-role">Co-Founder</div>
         </div>
       </article>
