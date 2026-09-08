@@ -56,6 +56,18 @@
     font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
     color: var(--dim);
   }
+  .photo-silhouette {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+    background:
+      radial-gradient(360px 220px at 60% 15%, rgba(155,47,135,0.20), transparent 65%),
+      linear-gradient(150deg, #1E1126, var(--plum));
+  }
+  .photo-silhouette svg { width: 58px; height: 58px; fill: rgba(240,238,248,0.30); }
+  .photo-silhouette span {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--dim);
+  }
   .tier-label {
     font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
     color: var(--magenta); text-align: center;
@@ -183,21 +195,11 @@
           <div class="person-role">Chief of Content</div>
         </div>
       </article>
-    </div>
-    <div class="tier-label">Leads &amp; Coordinators</div>
-    <div class="team-grid">
       <article class="person-card">
-        <div class="person-photo"><img src="assets/img/drivy.jpg" alt="Dr Ivy"></div>
+        <div class="person-photo"><img src="assets/img/drivy.jpg" alt="Dr Ivy Okoku"></div>
         <div class="person-info">
-          <h3 class="person-name">Dr Ivy</h3>
-          <div class="person-role">Operations</div>
-        </div>
-      </article>
-      <article class="person-card">
-        <div class="person-photo"><img src="assets/img/pelumi.jpg" alt="Aluko Pelumi"></div>
-        <div class="person-info">
-          <h3 class="person-name">Aluko Pelumi</h3>
-          <div class="person-role">Tech Product Lead</div>
+          <h3 class="person-name">Dr Ivy Okoku</h3>
+          <div class="person-role">Head of Operations</div>
         </div>
       </article>
       <article class="person-card">
@@ -205,6 +207,33 @@
         <div class="person-info">
           <h3 class="person-name">Awokoya Dami</h3>
           <div class="person-role">People &amp; Culture Consultant</div>
+        </div>
+      </article>
+      <article class="person-card">
+        <div class="person-photo"><div class="photo-silhouette">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2.5c-4.2 0-8 2.1-8 4.7V22h16v-2.8c0-2.6-3.8-4.7-8-4.7z"/></svg>
+            <span>Photo to come</span>
+          </div></div>
+        <div class="person-info">
+          <h3 class="person-name">Winnie Stella</h3>
+          <div class="person-role">Head of Fundraising</div>
+        </div>
+      </article>
+    </div>
+    <div class="tier-label">Coordinators</div>
+    <div class="team-grid">
+      <article class="person-card">
+        <div class="person-photo"><img src="assets/img/pelumi.jpg" alt="Aluko Pelumi"></div>
+        <div class="person-info">
+          <h3 class="person-name">Aluko Pelumi</h3>
+          <div class="person-role">Tech Product Coordinator</div>
+        </div>
+      </article>
+      <article class="person-card">
+        <div class="person-photo"><img src="assets/img/nifemi.jpg" alt="Adeniran Oluwanifemi"></div>
+        <div class="person-info">
+          <h3 class="person-name">Adeniran Oluwanifemi</h3>
+          <div class="person-role">Visual &amp; Brand Design Lead</div>
         </div>
       </article>
       <article class="person-card">
@@ -222,20 +251,13 @@
         </div>
       </article>
     </div>
-    <div class="tier-label">Specialists</div>
+    <div class="tier-label">The Team</div>
     <div class="team-grid">
       <article class="person-card">
         <div class="person-photo"><img src="assets/img/christabel.jpg" alt="Oragui Christabel"></div>
         <div class="person-info">
           <h3 class="person-name">Oragui Christabel</h3>
           <div class="person-role">Social Media Manager</div>
-        </div>
-      </article>
-      <article class="person-card">
-        <div class="person-photo"><img src="assets/img/nifemi.jpg" alt="Adeniran Oluwanifemi"></div>
-        <div class="person-info">
-          <h3 class="person-name">Adeniran Oluwanifemi</h3>
-          <div class="person-role">Graphics Designer</div>
         </div>
       </article>
       <article class="person-card">
@@ -252,9 +274,6 @@
           <div class="person-role">Executive Assistant</div>
         </div>
       </article>
-    </div>
-    <div class="tier-label">Interns</div>
-    <div class="team-grid">
       <article class="person-card">
         <div class="person-photo"><img src="assets/img/wisdom.jpg" alt="Bassey Wisdom"></div>
         <div class="person-info">
