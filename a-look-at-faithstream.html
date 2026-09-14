@@ -74,6 +74,19 @@
   .video-info { padding: var(--sp-4) var(--sp-5) var(--sp-5); }
   .video-title { font-size: 14.5px; font-weight: 700; color: var(--cream); line-height: 1.45; }
   .video-channel { margin-top: 6px; font-size: 12.5px; color: var(--dim); }
+  .videos-intro {
+    max-width: 700px; margin: 0 auto var(--sp-8); text-align: center;
+    font-size: 15px; line-height: 1.7; color: var(--dim);
+  }
+  .drive-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 700; color: var(--magenta);
+    padding: 8px 14px; border: 1px solid rgba(155,47,135,0.35);
+    border-radius: var(--radius-md); background: rgba(155,47,135,0.08);
+    transition: background 0.16s, color 0.16s;
+  }
+  .drive-link:hover { background: rgba(155,47,135,0.16); color: #B23FA0; }
+  .drive-link svg { width: 15px; height: 15px; fill: currentColor; }
 
   /* ── Big nav buttons (Introducing FaithStream) ── */
   .big-links { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: var(--sp-4); }
@@ -186,7 +199,7 @@
     <div class="coming-soon">
       <img src="assets/logo/faithstream_icon_white.png" alt="">
       <div class="coming-soon-title">A Look at FaithStream</div>
-      <p class="coming-soon-text">This page hasn&rsquo;t been added yet. Once the content is ready it will appear here &mdash; readable right on the page.</p>
+      <p class="coming-soon-text">The video is ready to go in &mdash; drop the Google Drive link in and it will play right on this page.</p>
       <span class="coming-soon-badge">Coming soon</span>
     </div>
   </div>
